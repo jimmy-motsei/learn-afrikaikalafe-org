@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap');
 @import "tailwindcss";
 
 /*
@@ -13,8 +14,6 @@
  *   — Functional  → DM Sans           (UI, labels, captions)
  * ============================================================
  */
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap');
 
 :root {
 
@@ -52,20 +51,15 @@
   /* ===================================================
    * TYPOGRAPHY — THREE-FONT SYSTEM
    *
-   * --font-display  Cormorant Garamond  H1, H2 only
-   *                 High-contrast serif. Monumental at
-   *                 large sizes. Do not use below 2rem.
-   *
-   * --font-serif    Lora                H3, H4, lead body
-   *                 Lower contrast, screen-optimised.
-   *                 Warm, readable at 18–28px.
+   * --font-display  Lora                H1, H2, H3, H4
+   *                 Warm humanist serif. Matches logo
+   *                 typography. Readable at all display sizes.
    *
    * --font-body     DM Sans             UI, labels, nav
    *                 Humanist sans. Functional, never cold.
    * =================================================== */
 
-  --font-display:       'Cormorant Garamond', Georgia, serif;
-  --font-serif:         'Lora', Georgia, serif;
+  --font-display:       'Lora', Georgia, serif;
   --font-body:          'DM Sans', system-ui, sans-serif;
 
 
@@ -201,7 +195,7 @@ h1, h2 {
 
 /* Literary — Lora — H3, H4 */
 h3, h4 {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-weight: var(--font-weight-regular);
   line-height: var(--leading-snug);
   letter-spacing: var(--tracking-normal);

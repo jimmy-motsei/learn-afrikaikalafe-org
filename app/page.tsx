@@ -1,3 +1,4 @@
+import Image from "next/image";
 import RegionSelector from "@/components/RegionSelector";
 
 const GATHERINGS = [
@@ -36,7 +37,14 @@ export default function HomePage() {
             paddingBottom: "var(--space-m)",
           }}
         >
-          <span className="logo-placeholder">Afrika Ikalafe</span>
+          <Image
+            src="/logos/AfrikaIkalafe-Full-colour.png"
+            alt="Afrika Ikalafe Pluriversity"
+            width={68}
+            height={70}
+            priority
+            style={{ objectFit: "contain" }}
+          />
 
           <div style={{ display: "flex", alignItems: "center", gap: "var(--space-xl)" }}>
             <a
@@ -517,9 +525,13 @@ export default function HomePage() {
             textAlign: "center",
           }}
         >
-          <span className="logo-placeholder logo-placeholder--reversed">
-            Afrika Ikalafe
-          </span>
+          <Image
+            src="/logos/AfrikaIkalafe-Full-colour.png"
+            alt="Afrika Ikalafe"
+            width={155}
+            height={160}
+            style={{ objectFit: "contain" }}
+          />
           <p
             style={{
               fontSize: "var(--text-body-s)",
