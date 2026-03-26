@@ -1,0 +1,382 @@
+@import "tailwindcss";
+
+/*
+ * ============================================================
+ * AFRIKAIKALAFE — DESIGN TOKEN SYSTEM
+ * Version: 1.1 · Updated: 26 March 2026
+ * Maintained by: Maru Online · hello@maruonline.com
+ *
+ * Concept: Literary Sacred Space
+ * Three typographic registers:
+ *   — Monumental  → Cormorant Garamond (H1, H2 display only)
+ *   — Literary    → Lora              (H3, H4, lead body)
+ *   — Functional  → DM Sans           (UI, labels, captions)
+ * ============================================================
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+
+  /* ===================================================
+   * COLOUR — PRIMITIVES
+   * =================================================== */
+
+  --color-earth:        #1C1208;   /* Primary text — warm near-black brown */
+  --color-clay:         #8B3A1E;   /* Primary action — deep terracotta */
+  --color-clay-light:   #B05030;   /* Hover state for clay */
+  --color-ochre:        #C8873A;   /* Accent — warm amber */
+  --color-sand:         #F5EFE4;   /* Page base — warm off-white */
+  --color-sand-deep:    #EDE4D4;   /* Cards, callout backgrounds */
+  --color-ivory:        #FAF7F2;   /* Hero and programme sections */
+  --color-sage:         #4A5C40;   /* Secondary accent — tier labels */
+  --color-muted:        #6B5A48;   /* Secondary text — warm mid-tone */
+
+
+  /* ===================================================
+   * COLOUR — SEMANTIC
+   * =================================================== */
+
+  --color-bg:           var(--color-sand);
+  --color-surface:      var(--color-ivory);
+  --color-surface-alt:  var(--color-sand-deep);
+  --color-text:         var(--color-earth);
+  --color-text-muted:   var(--color-muted);
+  --color-action:       var(--color-clay);
+  --color-action-hover: var(--color-clay-light);
+  --color-accent:       var(--color-ochre);
+  --color-inverse-bg:   var(--color-earth);
+  --color-inverse-text: var(--color-sand);
+
+
+  /* ===================================================
+   * TYPOGRAPHY — THREE-FONT SYSTEM
+   *
+   * --font-display  Cormorant Garamond  H1, H2 only
+   *                 High-contrast serif. Monumental at
+   *                 large sizes. Do not use below 2rem.
+   *
+   * --font-serif    Lora                H3, H4, lead body
+   *                 Lower contrast, screen-optimised.
+   *                 Warm, readable at 18–28px.
+   *
+   * --font-body     DM Sans             UI, labels, nav
+   *                 Humanist sans. Functional, never cold.
+   * =================================================== */
+
+  --font-display:       'Cormorant Garamond', Georgia, serif;
+  --font-serif:         'Lora', Georgia, serif;
+  --font-body:          'DM Sans', system-ui, sans-serif;
+
+
+  /* ===================================================
+   * TYPOGRAPHY — SCALE
+   * =================================================== */
+
+  --text-display-xl:    clamp(3rem, 6vw, 5.5rem);       /* H1 — Cormorant */
+  --text-display-l:     clamp(2rem, 4vw, 3.5rem);        /* H2 — Cormorant */
+  --text-display-m:     clamp(1.5rem, 2.5vw, 2.25rem);   /* H3 — Lora */
+  --text-heading:       1.5rem;                           /* H4 — Lora */
+  --text-subheading:    1.125rem;                         /* Eyebrow — Cormorant italic */
+  --text-body-l:        1.125rem;                         /* Lead para — Lora */
+  --text-body:          1rem;                             /* Body — DM Sans */
+  --text-body-s:        0.875rem;                         /* Captions — DM Sans */
+  --text-label:         0.75rem;                          /* Pills/tags — DM Sans */
+
+
+  /* ===================================================
+   * TYPOGRAPHY — STYLE RULES
+   * =================================================== */
+
+  --font-weight-light:    300;
+  --font-weight-regular:  400;
+  --font-weight-medium:   500;
+
+  --leading-tight:        1.2;    /* Display headings */
+  --leading-snug:         1.4;    /* Subheadings */
+  --leading-base:         1.7;    /* Body copy */
+  --leading-loose:        1.9;    /* Long-form text */
+
+  --tracking-tight:      -0.02em; /* Large display text */
+  --tracking-normal:      0.01em; /* Body text */
+  --tracking-wide:        0.05em; /* UI labels */
+  --tracking-wider:       0.08em; /* Button text, uppercase */
+
+
+  /* ===================================================
+   * SPACING
+   * =================================================== */
+
+  --space-xs:           0.25rem;
+  --space-s:            0.5rem;
+  --space-m:            1rem;
+  --space-l:            1.5rem;
+  --space-xl:           2.5rem;
+  --space-2xl:          4rem;
+  --space-3xl:          6rem;
+  --space-4xl:          10rem;
+
+  --container-max:      1200px;
+  --container-narrow:   720px;
+  --gutter:             clamp(1rem, 4vw, 2.5rem);
+
+
+  /* ===================================================
+   * BORDER & SHAPE
+   * =================================================== */
+
+  --radius-s:           4px;
+  --radius-m:           8px;
+  --radius-l:           16px;
+  --radius-round:       999px;
+
+  --border-subtle:      1px solid rgba(28, 18, 8, 0.10);
+  --border-medium:      1px solid rgba(28, 18, 8, 0.20);
+  --border-strong:      1px solid rgba(28, 18, 8, 0.40);
+
+
+  /* ===================================================
+   * MOTION
+   * =================================================== */
+
+  --duration-fast:      150ms;
+  --duration-base:      300ms;
+  --duration-slow:      600ms;
+  --duration-xslow:     1200ms;
+
+  --ease-standard:      cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-enter:         cubic-bezier(0, 0, 0.2, 1);
+  --ease-exit:          cubic-bezier(0.4, 0, 1, 1);
+  --ease-expressive:    cubic-bezier(0.34, 1.56, 0.64, 1);
+
+
+  /* ===================================================
+   * SHADOWS — warm-tinted, never cold grey
+   * =================================================== */
+
+  --shadow-s:           0 1px 3px rgba(28, 18, 8, 0.08);
+  --shadow-m:           0 4px 16px rgba(28, 18, 8, 0.12);
+  --shadow-l:           0 12px 40px rgba(28, 18, 8, 0.16);
+  --shadow-warm:        0 8px 32px rgba(139, 58, 30, 0.15);
+
+}
+
+
+/* ===================================================
+ * BASE RESET
+ * =================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body);
+  line-height: var(--leading-base);
+}
+
+/* Monumental — Cormorant Garamond — H1 & H2 only */
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-light);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+}
+
+/* Literary — Lora — H3, H4 */
+h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-normal);
+  color: var(--color-text);
+}
+
+h5, h6 {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text);
+}
+
+h1 { font-size: var(--text-display-xl); }
+h2 { font-size: var(--text-display-l); }
+h3 { font-size: var(--text-display-m); }
+h4 { font-size: var(--text-heading); }
+
+p {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-base);
+  color: var(--color-text);
+}
+
+/* Lead paragraph — Lora for warmth and readability */
+p.lead {
+  font-family: var(--font-serif);
+  font-size: var(--text-body-l);
+  line-height: var(--leading-loose);
+}
+
+a {
+  color: var(--color-action);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+a:hover {
+  color: var(--color-action-hover);
+}
+
+
+/* ===================================================
+ * UTILITY CLASSES
+ * =================================================== */
+
+/* Eyebrow — Cormorant italic in ochre — above headings */
+.eyebrow {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-subheading);
+  color: var(--color-accent);
+  letter-spacing: var(--tracking-normal);
+  display: block;
+  margin-bottom: var(--space-s);
+}
+
+/* Pill / badge */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-s);
+  border-radius: var(--radius-round);
+  font-family: var(--font-body);
+  font-size: var(--text-label);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  background-color: var(--color-surface-alt);
+  color: var(--color-text-muted);
+}
+
+.pill--accent {
+  background-color: var(--color-ochre);
+  color: var(--color-ivory);
+}
+
+.pill--sage {
+  background-color: var(--color-sage);
+  color: var(--color-ivory);
+}
+
+/* Primary CTA button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+  padding: var(--space-m) var(--space-xl);
+  border-radius: var(--radius-m);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  transition:
+    background-color var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.btn--primary {
+  background-color: var(--color-action);
+  color: var(--color-ivory);
+  box-shadow: var(--shadow-warm);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-action-hover);
+  box-shadow: var(--shadow-l);
+  transform: translateY(-1px);
+}
+
+.btn--ghost {
+  background-color: transparent;
+  color: var(--color-text);
+  border: var(--border-medium);
+}
+
+.btn--ghost:hover {
+  background-color: var(--color-surface-alt);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--narrow {
+  max-width: var(--container-narrow);
+}
+
+/* Dark / inverse section */
+.section--inverse {
+  background-color: var(--color-inverse-bg);
+  color: var(--color-inverse-text);
+}
+
+.section--inverse h1,
+.section--inverse h2,
+.section--inverse h3,
+.section--inverse h4,
+.section--inverse p {
+  color: var(--color-inverse-text);
+}
+
+.section--inverse .eyebrow {
+  color: var(--color-ochre);
+}
+
+/*
+ * ============================================================
+ * LOGO PLACEHOLDER
+ * ⚠️  Awaiting assets from Kgali (Google Drive)
+ * Required: Primary · Reversed · Monochrome · Favicon · Social
+ * ============================================================
+ */
+
+.logo-placeholder {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-light);
+  letter-spacing: 0.05em;
+  color: var(--color-earth);
+}
+
+.logo-placeholder--reversed {
+  color: var(--color-sand);
+}
