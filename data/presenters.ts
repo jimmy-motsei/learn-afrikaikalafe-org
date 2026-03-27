@@ -117,15 +117,15 @@ export const presenters: Presenter[] = [
     imagePath:   '/images/presenters/rochelle-webster-nembhard.jpg',
   },
   {
-    id:          'lizy-hall',
-    name:        'Lizy Hall',
+    id:          'liz-hall',
+    name:        'Liz Hall',
     track:       'community',
     title:       'Psychodynamic Psychotherapist',
     location:    'Aotearoa, New Zealand',
-    bio:         'Lizy Hall is a psychodynamic psychotherapist with a specialist interest in women\'s roles and archetypes within Māori storytelling traditions. She brings the southern hemisphere\'s indigenous feminine frameworks into conversation with African womb-centred healing — holding the community dimension of the programme with warmth and depth.',
+    bio:         'Liz Hall is a psychodynamic psychotherapist with a specialist interest in women\'s roles and archetypes within Māori storytelling traditions. She brings the southern hemisphere\'s indigenous feminine frameworks into conversation with African womb-centred healing — holding the community dimension of the programme with warmth and depth.',
     gathering:   7,
     topic:       'TBC',
-    imagePath:   '/images/presenters/lizy-hall.jpg',
+    imagePath:   '/images/presenters/liz-hall.jpg',
   },
 ]
 
