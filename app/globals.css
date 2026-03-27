@@ -496,7 +496,8 @@ a:hover {
 /* Featured card: photo takes left half */
 .presenter-card--featured .presenter-card__photo-wrap {
   width:        50%;
-  aspect-ratio: auto;
+  aspect-ratio: 3 / 4;
+  min-height:   380px;
 }
 
 @media (max-width: 768px) {
