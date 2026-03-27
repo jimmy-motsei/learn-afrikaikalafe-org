@@ -1860,3 +1860,147 @@ img { display: block; max-width: 100%; }
   color:       var(--color-muted);
   max-width:   360px;
 }
+
+
+/* ============================================================
+ * MOBILE RESPONSIVE — iPhone X / 375px · v2
+ * Consolidated breakpoint fixes
+ * ============================================================ */
+
+/* ── Global: prevent any stray horizontal overflow ─────────── */
+html, body {
+  overflow-x: hidden;
+  max-width:  100%;
+}
+
+/* ── Hero ─────────────────────────────────────────────────── */
+
+/* Fix column-gap bleed on single-column grid */
+@media (max-width: 900px) {
+  .hero__inner {
+    column-gap: 0;
+  }
+}
+
+/* Stack hero CTAs full-width on mobile */
+@media (max-width: 640px) {
+  .hero__actions {
+    flex-direction: column;
+    align-items:    stretch;
+  }
+
+  .hero__actions .btn {
+    width:      100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* Remove fixed max-width so lead text fills the column */
+  .hero__lead {
+    max-width: 100%;
+  }
+
+  /* Shorter portrait frame on phones */
+  .hero__image-frame {
+    min-height: 300px;
+  }
+
+  /* Tighten top padding so hero doesn't feel too sparse */
+  .hero__inner {
+    padding-top:    var(--space-xl);
+    padding-bottom: var(--space-xl);
+  }
+}
+
+/* ── Nav ──────────────────────────────────────────────────── */
+
+/* Reduce nav gap so logo and register don't crowd */
+@media (max-width: 640px) {
+  .site-nav__inner {
+    gap: var(--space-s);
+  }
+}
+
+/* ── About section ────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .about-section {
+    padding: var(--space-2xl) 0;
+  }
+}
+
+/* ── Programme section ────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .programme-section {
+    padding: var(--space-2xl) 0;
+  }
+}
+
+/* ── Presenters section ───────────────────────────────────── */
+
+/* Reduce presenter-featured__content padding on mobile */
+@media (max-width: 768px) {
+  .presenter-featured__content {
+    padding: var(--space-l);
+  }
+}
+
+@media (max-width: 640px) {
+  .presenters-section {
+    padding: var(--space-2xl) var(--gutter);
+  }
+}
+
+/* ── Pricing section ──────────────────────────────────────── */
+
+/* Full-width pricing cards with less outer padding on small screens */
+@media (max-width: 640px) {
+  .pricing-section {
+    padding: var(--space-2xl) 0;
+  }
+
+  .pricing-grid {
+    max-width: 100%;
+  }
+
+  .pricing-card {
+    padding: var(--space-l);
+  }
+
+  /* Ensure region tabs don't clip */
+  .region-selector {
+    padding: 0 var(--gutter);
+  }
+}
+
+/* ── Community section ────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .community-section {
+    padding: var(--space-2xl) var(--gutter);
+  }
+}
+
+/* ── Footer ───────────────────────────────────────────────── */
+
+/* Stack brand and links vertically on mobile */
+@media (max-width: 640px) {
+  .site-footer__inner {
+    flex-direction:  column;
+    align-items:     flex-start;
+    gap:             var(--space-l);
+  }
+
+  .site-footer__links {
+    gap: var(--space-m);
+  }
+}
+
+/* ── Signup form ──────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .signup-form {
+    padding: var(--space-l);
+  }
+}
