@@ -25,6 +25,7 @@ import Link from 'next/link'
 import { presenters, convenor, guestPresenters, TRACK_LABELS } from '@/data/presenters'
 import { RegionSelector }    from '@/components/RegionSelector'
 import { GatheringSignup }   from '@/components/GatheringSignup'
+import { FadeUp }            from '@/components/FadeUp'
 
 // ── METADATA ──────────────────────────────────────────────────
 export const metadata = {
@@ -253,36 +254,40 @@ export default function HomePage() {
         <section className="about-section" id="about">
           <div className="about-section__inner">
 
-            <div className="about-section__header">
-              <span className="eyebrow">The Work</span>
-              <h2 className="section-heading">
-                What We Are Gathering For
-              </h2>
-            </div>
+            <FadeUp>
+              <div className="about-section__header">
+                <span className="eyebrow">The Work</span>
+                <h2 className="section-heading">
+                  What We Are Gathering For
+                </h2>
+              </div>
+            </FadeUp>
 
             <div className="about-section__body">
-              <div className="about-section__text">
-                <p className="lead-text">
-                  The womb is not only a body part. It is a living archive — the
-                  first ecology every human being has ever known. To remember it
-                  is to remember ourselves.
-                </p>
-                <p>
-                  Afrika Ikalafe Pluriversity is a centre for land-based healing,
-                  learning and living. Founded by Dr Mmatshilo Motsei — nurse, midwife,
-                  author, and healing justice pioneer — it is the only African-led,
-                  African-origin, land-based womb healing Pluriversity with global reach.
-                </p>
-                <p>
-                  <em>Womb as Our First Ecology</em> is a seven-gathering global
-                  programme. Each session is held by a different scholar, artist,
-                  or practitioner — women who carry this knowledge from the ground
-                  of their own lived and studied experience.
-                </p>
-                <p>
-                  This is not a course. It is a circle.
-                </p>
-              </div>
+              <FadeUp delay={100}>
+                <div className="about-section__text">
+                  <p className="lead-text">
+                    The womb is not only a body part. It is a living archive — the
+                    first ecology every human being has ever known. To remember it
+                    is to remember ourselves.
+                  </p>
+                  <p>
+                    Afrika Ikalafe Pluriversity is a centre for land-based healing,
+                    learning and living. Founded by Dr Mmatshilo Motsei — nurse, midwife,
+                    author, and healing justice pioneer — it is the only African-led,
+                    African-origin, land-based womb healing Pluriversity with global reach.
+                  </p>
+                  <p>
+                    <em>Womb as Our First Ecology</em> is a seven-gathering global
+                    programme. Each session is held by a different scholar, artist,
+                    or practitioner — women who carry this knowledge from the ground
+                    of their own lived and studied experience.
+                  </p>
+                  <p>
+                    This is not a course. It is a circle.
+                  </p>
+                </div>
+              </FadeUp>
 
               {/* Stat callouts */}
               <div className="about-section__stats">
@@ -291,11 +296,13 @@ export default function HomePage() {
                   { number: '7', label: 'Scholars & Artists' },
                   { number: '5', label: 'Continents Represented' },
                   { number: '3', label: 'Pathways to Join' },
-                ].map(stat => (
-                  <div key={stat.label} className="stat-card">
-                    <span className="stat-card__number">{stat.number}</span>
-                    <span className="stat-card__label">{stat.label}</span>
-                  </div>
+                ].map((stat, i) => (
+                  <FadeUp key={stat.label} delay={i * 80}>
+                    <div className="stat-card">
+                      <span className="stat-card__number">{stat.number}</span>
+                      <span className="stat-card__label">{stat.label}</span>
+                    </div>
+                  </FadeUp>
                 ))}
               </div>
             </div>
@@ -307,43 +314,47 @@ export default function HomePage() {
         <section className="programme-section" id="programme">
           <div className="programme-section__inner">
 
-            <div className="programme-section__header">
-              <span className="eyebrow">The Journey</span>
-              <h2 className="section-heading">
-                Seven Gatherings
-              </h2>
-              <p className="section-intro">
-                Each gathering is led by a different presenter. Dr Motsei opens
-                the series and convenes the space throughout. Sessions are held
-                online monthly, with replays available within 48 hours.
-              </p>
-            </div>
+            <FadeUp>
+              <div className="programme-section__header">
+                <span className="eyebrow">The Journey</span>
+                <h2 className="section-heading">
+                  Seven Gatherings
+                </h2>
+                <p className="section-intro">
+                  Each gathering is led by a different presenter. Dr Motsei opens
+                  the series and convenes the space throughout. Sessions are held
+                  online monthly, with replays available within 48 hours.
+                </p>
+              </div>
+            </FadeUp>
 
-            <ol className="gathering-list" aria-label="Programme gatherings">
-              {gatherings.map((g) => (
-                <li key={g.number} className="gathering-item">
-                  <span
-                    className="gathering-item__number"
-                    style={{ color: TRACK_COLOUR[g.track] }}
-                  >
-                    {String(g.number).padStart(2, '0')}
-                  </span>
-
-                  <div className="gathering-item__body">
+            <FadeUp delay={120}>
+              <ol className="gathering-list" aria-label="Programme gatherings">
+                {gatherings.map((g) => (
+                  <li key={g.number} className="gathering-item">
                     <span
-                      className="gathering-item__track"
+                      className="gathering-item__number"
                       style={{ color: TRACK_COLOUR[g.track] }}
                     >
-                      {TRACK_LABELS[g.track]}
+                      {String(g.number).padStart(2, '0')}
                     </span>
-                    <h3 className="gathering-item__presenter">{g.presenter}</h3>
-                    <p className="gathering-item__topic">{g.topic}</p>
-                  </div>
 
-                  <span className="gathering-item__month">{g.month}</span>
-                </li>
-              ))}
-            </ol>
+                    <div className="gathering-item__body">
+                      <span
+                        className="gathering-item__track"
+                        style={{ color: TRACK_COLOUR[g.track] }}
+                      >
+                        {TRACK_LABELS[g.track]}
+                      </span>
+                      <h3 className="gathering-item__presenter">{g.presenter}</h3>
+                      <p className="gathering-item__topic">{g.topic}</p>
+                    </div>
+
+                    <span className="gathering-item__month">{g.month}</span>
+                  </li>
+                ))}
+              </ol>
+            </FadeUp>
 
           </div>
         </section>
@@ -352,19 +363,22 @@ export default function HomePage() {
         <section className="presenters-section" id="presenters">
           <div className="presenters-section__inner">
 
-            <div className="presenters-section__header">
-              <span className="eyebrow">The Women Holding This Space</span>
-              <h2 className="section-heading">
-                Meet the Hosts
-              </h2>
-              <p className="section-intro">
-                Together, this team will guide participants through a powerful
-                journey of remembering the womb as our first ecology.
-              </p>
-            </div>
+            <FadeUp>
+              <div className="presenters-section__header">
+                <span className="eyebrow">The Women Holding This Space</span>
+                <h2 className="section-heading">
+                  Meet the Hosts
+                </h2>
+                <p className="section-intro">
+                  Together, this team will guide participants through a powerful
+                  journey of remembering the womb as our first ecology.
+                </p>
+              </div>
+            </FadeUp>
 
             {/* Convenor — featured */}
             {convenor && (
+              <FadeUp delay={100}>
               <div className="presenter-featured">
                 <div className="presenter-featured__photo-wrap">
                   <Image
@@ -395,6 +409,7 @@ export default function HomePage() {
                   <span className="gathering-badge">Gathering 1 · Convenor</span>
                 </div>
               </div>
+              </FadeUp>
             )}
 
             {/* Group poster — add back when group photo is available
@@ -412,8 +427,9 @@ export default function HomePage() {
 
             {/* Guest presenter grid */}
             <div className="presenter-grid">
-              {guestPresenters.map((p) => (
-                <article key={p.id} className="presenter-card" data-track={p.track}>
+              {guestPresenters.map((p, i) => (
+                <FadeUp key={p.id} delay={i * 80}>
+                <article className="presenter-card" data-track={p.track}>
                   <div className="presenter-card__photo-wrap">
                     <Image
                       src={p.imagePath}
@@ -446,6 +462,7 @@ export default function HomePage() {
                     )}
                   </div>
                 </article>
+                </FadeUp>
               ))}
             </div>
 
@@ -456,39 +473,45 @@ export default function HomePage() {
         <section className="pricing-section" id="pricing">
           <div className="pricing-section__inner">
 
-            <div className="pricing-section__header">
-              <span className="eyebrow pricing-section__eyebrow">
-                Three Pathways
-              </span>
-              <h2 className="section-heading pricing-section__heading">
-                How to Join
-              </h2>
-              <p className="section-intro pricing-section__intro">
-                These are not feature bundles. They are levels of relationship
-                with the work — and with Dr Motsei. Select your region to see
-                pricing in your currency.
-              </p>
-            </div>
+            <FadeUp>
+              <div className="pricing-section__header">
+                <span className="eyebrow pricing-section__eyebrow">
+                  Three Pathways
+                </span>
+                <h2 className="section-heading pricing-section__heading">
+                  How to Join
+                </h2>
+                <p className="section-intro pricing-section__intro">
+                  These are not feature bundles. They are levels of relationship
+                  with the work — and with Dr Motsei. Select your region to see
+                  pricing in your currency.
+                </p>
+              </div>
+            </FadeUp>
 
-            <RegionSelector />
+            <FadeUp delay={120}>
+              <RegionSelector />
+            </FadeUp>
 
           </div>
         </section>
 
         {/* ── 7. COMMUNITY CTA ────────────────────────────────── */}
         <section className="community-section">
-          <div className="community-section__inner">
-            <span className="eyebrow">Between Gatherings</span>
-            <h2 className="section-heading">
-              A Space of Ongoing Belonging
-            </h2>
-            <p className="lead-text">
-              Participants connect through a private Telegram community between
-              sessions — continuing the conversation, supporting one another,
-              and staying rooted in the work.
-            </p>
-            <GatheringSignup />
-          </div>
+          <FadeUp>
+            <div className="community-section__inner">
+              <span className="eyebrow">Between Gatherings</span>
+              <h2 className="section-heading">
+                A Space of Ongoing Belonging
+              </h2>
+              <p className="lead-text">
+                Participants connect through a private Telegram community between
+                sessions — continuing the conversation, supporting one another,
+                and staying rooted in the work.
+              </p>
+              <GatheringSignup />
+            </div>
+          </FadeUp>
         </section>
 
       </main>

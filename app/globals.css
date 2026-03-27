@@ -790,6 +790,76 @@ img { display: block; max-width: 100%; }
   .site-nav__links { display: none; }
 }
 
+/* ══════════════════════════════════════════════════════════
+   MOTION
+   Hero: CSS keyframe on load (no JS, above the fold)
+   Scroll: .fade-up / .fade-up--visible via IntersectionObserver
+   prefers-reduced-motion: all animation suppressed
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Scroll fade-up ──────────────────────────────────────── */
+
+.fade-up {
+  opacity:    0;
+  transform:  translateY(22px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-up--visible {
+  opacity:   1;
+  transform: translateY(0);
+}
+
+/* Grid / flex children — fill their cell so layout is unchanged */
+.presenter-grid > .fade-up,
+.about-section__stats > .fade-up {
+  display:        flex;
+  flex-direction: column;
+}
+
+.presenter-grid > .fade-up > .presenter-card,
+.about-section__stats > .fade-up > .stat-card {
+  flex: 1;
+}
+
+/* ── Hero entrance (CSS only, fires on page load) ────────── */
+
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hero-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.hero__eyebrow   { animation: hero-rise 0.55s ease both; animation-delay: 0.05s; }
+.hero__heading   { animation: hero-rise 0.65s ease both; animation-delay: 0.20s; }
+.hero__lead      { animation: hero-rise 0.55s ease both; animation-delay: 0.40s; }
+.hero__actions   { animation: hero-rise 0.55s ease both; animation-delay: 0.55s; }
+.hero__meta      { animation: hero-rise 0.55s ease both; animation-delay: 0.65s; }
+.hero__image-wrap { animation: hero-fade 0.9s ease both; animation-delay: 0.30s; }
+
+/* ── Respect reduced motion ──────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    opacity:    1;
+    transform:  none;
+    transition: none;
+  }
+
+  .hero__eyebrow,
+  .hero__heading,
+  .hero__lead,
+  .hero__actions,
+  .hero__meta,
+  .hero__image-wrap {
+    animation: none;
+  }
+}
+
 /* ── HERO ─────────────────────────────────────────────────── */
 
 .hero {
