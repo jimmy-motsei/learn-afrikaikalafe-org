@@ -86,18 +86,22 @@ A year-long literary gathering programme — 7 sessions, multiple presenters, pa
 
 ## 4. Programme Content
 
-**7 Gatherings:**
-| # | Title | Presenter |
-|---|---|---|
-| 01 | The Root — Origins & Belonging | TBC |
-| 02 | The Story — Oral Tradition & Memory | TBC |
-| 03 | The Body — Literature & the Physical Self | TBC |
-| 04 | The Land — Place, Displacement & Home | TBC |
-| 05 | The Voice — Language, Power & Identity | TBC |
-| 06 | The Future — Afrofuturism & Imagination | TBC |
-| 07 | The Return — Synthesis & Community | Dr Motsei (Convenor) |
+**7 Gatherings — confirmed presenter schedule:**
+| # | Month | Presenter | Topic |
+|---|---|---|---|
+| 01 | May 2026 | Dr Mmatshilo Motsei (Convenor) | Womb as First Ecology — The Concept, The Call, The Gathering |
+| 02 | June 2026 | Liz Hall | TBC |
+| 03 | July 2026 | Darlene Miller | TBC |
+| 04 | August 2026 | Jessica Horn | TBC |
+| 05 | September 2026 | Françoise Vergès | TBC |
+| 06 | October 2026 | Lyn Ossome | TBC |
+| 07 | November 2026 | Rochelle Webster-Nembhard | TBC |
 
-All gathering dates are TBC.
+**Dr Mmatshilo Motsei — confirmed short bio (live in presenters.ts):**
+> Founder of Afrika Ikalafe Pluriversity and pioneer of African healing justice, Mmatshilo is a nurse, midwife, social researcher and author of six books. Three decades of transformative activism — from founding ADAPT in Alexandra Township to the UN Scroll of Honour and two Honorary Doctorates — have placed her at the forefront of womb-centred, community-rooted healing.
+
+**Title (live):** Nurse, Author & African Healing Justice Pioneer
+**Source bio:** `/Documents/Maru Online/Clients/AfrikaIkalafe/Projects/landing-page/bios/mmatshilo-motsei-Bio.docx`
 
 ---
 

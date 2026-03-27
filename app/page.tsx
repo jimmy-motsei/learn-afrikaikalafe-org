@@ -51,7 +51,7 @@ const TRACK_COLOUR: Record<string, string> = {
 const gatherings = [
   {
     number: 1,
-    month: 'May 2025',
+    month: 'May 2026',
     presenter: 'Dr Mmatshilo Motsei',
     role: 'Convenor',
     topic: 'Womb as First Ecology — The Concept, The Call, The Gathering',
@@ -59,7 +59,7 @@ const gatherings = [
   },
   {
     number: 2,
-    month: 'June 2025',
+    month: 'June 2026',
     presenter: 'Liz Hall',
     role: 'Community',
     topic: 'To be announced',
@@ -67,7 +67,7 @@ const gatherings = [
   },
   {
     number: 3,
-    month: 'July 2025',
+    month: 'July 2026',
     presenter: 'Darlene Miller',
     role: 'Healing',
     topic: 'To be announced',
@@ -75,7 +75,7 @@ const gatherings = [
   },
   {
     number: 4,
-    month: 'August 2025',
+    month: 'August 2026',
     presenter: 'Jessica Horn',
     role: 'Embodiment',
     topic: 'To be announced',
@@ -83,7 +83,7 @@ const gatherings = [
   },
   {
     number: 5,
-    month: 'September 2025',
+    month: 'September 2026',
     presenter: 'Françoise Vergès',
     role: 'Healing',
     topic: 'To be announced',
@@ -91,7 +91,7 @@ const gatherings = [
   },
   {
     number: 6,
-    month: 'October 2025',
+    month: 'October 2026',
     presenter: 'Lyn Ossome',
     role: 'Community',
     topic: 'To be announced',
@@ -99,7 +99,7 @@ const gatherings = [
   },
   {
     number: 7,
-    month: 'November 2025',
+    month: 'November 2026',
     presenter: 'Rochelle Webster-Nembhard',
     role: 'Embodiment',
     topic: 'To be announced',
