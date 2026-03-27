@@ -1,357 +1,268 @@
-"use client";
+'use client'
 
-import { useState } from "react";
+// ============================================================
+// components/RegionSelector.tsx
+// Afrika Ikalafe — Geographic Pricing Selector
+// Maintained by: Maru Online · hello@maruonline.com
+// Last updated: 27 March 2026
+//
+// ARCHITECTURE: 15-product model · 3 tiers × 5 regions
+// Each region maps to separate Lemon Squeezy product URLs
+//
+// USAGE in app/page.tsx:
+//   import { RegionSelector } from '@/components/RegionSelector'
+//   <RegionSelector />
+//
+// TO UPDATE CHECKOUT URLS:
+//   Replace all '#ls-pending' values below with real
+//   Lemon Squeezy checkout URLs once products are created.
+//   Format: https://afrikaikalafe.lemonsqueezy.com/checkout/buy/{product-id}
+// ============================================================
 
-type Tier = {
-  id: string;
-  name: string;
-  price: string;
-  installments: string;
-  description: string;
-  checkoutUrl: string;
-};
+import { useState } from 'react'
+import Link from 'next/link'
 
-type Region = {
-  id: string;
-  label: string;
-  flag: string;
-  currency: string;
-  note: string;
-  tiers: Tier[];
-};
+// ── TYPES ──────────────────────────────────────────────────────
+
+type RegionKey = 'za' | 'africa' | 'us' | 'uk' | 'global'
+type TierKey   = 'seed' | 'gather' | 'root'
+
+interface Region {
+  key:      RegionKey
+  label:    string
+  flag:     string
+  currency: string
+}
+
+interface TierPrice {
+  display:      string        // e.g. "R 4,200" or "$397"
+  instalment?:  string        // e.g. "3 × R 1,400"
+  checkoutUrl:  string        // Lemon Squeezy URL — replace '#ls-pending'
+}
+
+interface Tier {
+  key:       TierKey
+  icon:      string
+  name:      string
+  subtitle:  string
+  tagline:   string
+  includes:  string[]
+  for:       string
+  capacity?: string
+  featured?: boolean
+}
+
+// ── REGIONS ────────────────────────────────────────────────────
 
 const REGIONS: Region[] = [
-  {
-    id: "south-africa",
-    label: "South Africa",
-    flag: "🇿🇦",
-    currency: "ZAR",
-    note: "Priced in South African Rand",
-    tiers: [
-      {
-        id: "sa-seed",
-        name: "Seed",
-        price: "R 1,200",
-        installments: "or 3 × R 420",
-        description: "Access to all 7 gatherings (recordings included)",
-        checkoutUrl: "#",
-      },
-      {
-        id: "sa-root",
-        name: "Root",
-        price: "R 2,400",
-        installments: "or 3 × R 840",
-        description: "All gatherings + curated reading materials + community circle",
-        checkoutUrl: "#",
-      },
-      {
-        id: "sa-canopy",
-        name: "Canopy",
-        price: "R 4,500",
-        installments: "or 3 × R 1,575",
-        description: "All gatherings + materials + mentorship access + patron recognition",
-        checkoutUrl: "#",
-      },
-    ],
-  },
-  {
-    id: "rest-of-africa",
-    label: "Rest of Africa",
-    flag: "🌍",
-    currency: "USD",
-    note: "Priced in USD · accessible from anywhere on the continent",
-    tiers: [
-      {
-        id: "roa-seed",
-        name: "Seed",
-        price: "$ 45",
-        installments: "or 3 × $16",
-        description: "Access to all 7 gatherings (recordings included)",
-        checkoutUrl: "#",
-      },
-      {
-        id: "roa-root",
-        name: "Root",
-        price: "$ 90",
-        installments: "or 3 × $32",
-        description: "All gatherings + curated reading materials + community circle",
-        checkoutUrl: "#",
-      },
-      {
-        id: "roa-canopy",
-        name: "Canopy",
-        price: "$ 160",
-        installments: "or 3 × $56",
-        description: "All gatherings + materials + mentorship access + patron recognition",
-        checkoutUrl: "#",
-      },
-    ],
-  },
-  {
-    id: "uk-europe",
-    label: "UK & Europe",
-    flag: "🇬🇧",
-    currency: "GBP / EUR",
-    note: "Priced in USD at a diaspora-adjusted rate",
-    tiers: [
-      {
-        id: "uke-seed",
-        name: "Seed",
-        price: "$ 75",
-        installments: "or 3 × $26",
-        description: "Access to all 7 gatherings (recordings included)",
-        checkoutUrl: "#",
-      },
-      {
-        id: "uke-root",
-        name: "Root",
-        price: "$ 150",
-        installments: "or 3 × $52",
-        description: "All gatherings + curated reading materials + community circle",
-        checkoutUrl: "#",
-      },
-      {
-        id: "uke-canopy",
-        name: "Canopy",
-        price: "$ 280",
-        installments: "or 3 × $98",
-        description: "All gatherings + materials + mentorship access + patron recognition",
-        checkoutUrl: "#",
-      },
-    ],
-  },
-  {
-    id: "north-america",
-    label: "North America",
-    flag: "🇺🇸",
-    currency: "USD",
-    note: "Priced in USD",
-    tiers: [
-      {
-        id: "na-seed",
-        name: "Seed",
-        price: "$ 75",
-        installments: "or 3 × $26",
-        description: "Access to all 7 gatherings (recordings included)",
-        checkoutUrl: "#",
-      },
-      {
-        id: "na-root",
-        name: "Root",
-        price: "$ 150",
-        installments: "or 3 × $52",
-        description: "All gatherings + curated reading materials + community circle",
-        checkoutUrl: "#",
-      },
-      {
-        id: "na-canopy",
-        name: "Canopy",
-        price: "$ 280",
-        installments: "or 3 × $98",
-        description: "All gatherings + materials + mentorship access + patron recognition",
-        checkoutUrl: "#",
-      },
-    ],
-  },
-  {
-    id: "rest-of-world",
-    label: "Rest of World",
-    flag: "🌐",
-    currency: "USD",
-    note: "Priced in USD · open to all wherever you are",
-    tiers: [
-      {
-        id: "row-seed",
-        name: "Seed",
-        price: "$ 60",
-        installments: "or 3 × $21",
-        description: "Access to all 7 gatherings (recordings included)",
-        checkoutUrl: "#",
-      },
-      {
-        id: "row-root",
-        name: "Root",
-        price: "$ 120",
-        installments: "or 3 × $42",
-        description: "All gatherings + curated reading materials + community circle",
-        checkoutUrl: "#",
-      },
-      {
-        id: "row-canopy",
-        name: "Canopy",
-        price: "$ 220",
-        installments: "or 3 × $77",
-        description: "All gatherings + materials + mentorship access + patron recognition",
-        checkoutUrl: "#",
-      },
-    ],
-  },
-];
+  { key: 'za',     label: 'South Africa',   flag: '🇿🇦', currency: 'ZAR' },
+  { key: 'africa', label: 'Rest of Africa',  flag: '🌍', currency: 'USD' },
+  { key: 'us',     label: 'USA & Canada',    flag: '🇺🇸', currency: 'USD' },
+  { key: 'uk',     label: 'UK & Europe',     flag: '🇬🇧', currency: 'GBP' },
+  { key: 'global', label: 'Global',          flag: '🌐', currency: 'USD' },
+]
 
-export default function RegionSelector() {
-  const [activeRegion, setActiveRegion] = useState<string>("south-africa");
+// ── TIERS ──────────────────────────────────────────────────────
 
-  const region = REGIONS.find((r) => r.id === activeRegion) ?? REGIONS[0];
+const TIERS: Tier[] = [
+  {
+    key:      'seed',
+    icon:     '🌱',
+    name:     'Seed',
+    subtitle: 'Enter the Archive',
+    tagline:  'Learn at your own pace. Return as often as you need.',
+    includes: [
+      'Lifetime access to all 7 recorded gatherings',
+      'Written reflection prompts per gathering',
+      'Participant resource library',
+    ],
+    for: 'Women who learn best independently, or whose timezone or schedule doesn\'t allow live attendance. A complete, powerful entry point.',
+  },
+  {
+    key:      'gather',
+    icon:     '🌿',
+    name:     'Gather',
+    subtitle: 'Join the Circle',
+    tagline:  'Come into the circle. Learn with others walking the same path.',
+    featured: true,
+    includes: [
+      'Everything in Seed',
+      'Access to all 7 monthly live gatherings',
+      'Session replays within 48 hours',
+      'Telegram community space',
+    ],
+    for: 'Women who want the relational, embodied dimension of learning — to be witnessed and to witness others.',
+  },
+  {
+    key:      'root',
+    icon:     '🌳',
+    name:     'Root',
+    subtitle: 'Walk with Mmatshilo',
+    tagline:  'For those who are ready to go all the way in.',
+    includes: [
+      'Everything in Gather',
+      '4 × private 1:1 sessions with Dr Motsei',
+      'Personalised integration support',
+      'Priority access to future programmes',
+    ],
+    for:      'Women ready for deep personal transformation with Dr Motsei\'s direct guidance.',
+    capacity: 'Maximum 10–12 participants per intake',
+  },
+]
+
+// ── PRICING TABLE ──────────────────────────────────────────────
+// 15 products: 3 tiers × 5 regions
+// Replace '#ls-pending' with real Lemon Squeezy checkout URLs
+// Naming convention: LS product name = "afrikaikalafe-{tier}-{region}"
+// e.g. "afrikaikalafe-seed-za", "afrikaikalafe-root-us"
+
+const PRICING: Record<RegionKey, Record<TierKey, TierPrice>> = {
+  za: {
+    seed:   { display: 'R 4,200',  instalment: '3 × R 1,400', checkoutUrl: '#ls-pending' },
+    gather: { display: 'R 8,400',  instalment: '3 × R 2,800', checkoutUrl: '#ls-pending' },
+    root:   { display: 'R 16,800', instalment: '3 × R 5,600', checkoutUrl: '#ls-pending' },
+  },
+  africa: {
+    seed:   { display: '$175',  instalment: '3 × $58',   checkoutUrl: '#ls-pending' },
+    gather: { display: '$350',  instalment: '3 × $117',  checkoutUrl: '#ls-pending' },
+    root:   { display: '$700',  instalment: '3 × $233',  checkoutUrl: '#ls-pending' },
+  },
+  us: {
+    seed:   { display: '$397',   instalment: '3 × $133',  checkoutUrl: '#ls-pending' },
+    gather: { display: '$797',   instalment: '3 × $266',  checkoutUrl: '#ls-pending' },
+    root:   { display: '$1,997', instalment: '3 × $666',  checkoutUrl: '#ls-pending' },
+  },
+  uk: {
+    seed:   { display: '£297',   instalment: '3 × £99',   checkoutUrl: '#ls-pending' },
+    gather: { display: '£597',   instalment: '3 × £199',  checkoutUrl: '#ls-pending' },
+    root:   { display: '£1,497', instalment: '3 × £499',  checkoutUrl: '#ls-pending' },
+  },
+  global: {
+    seed:   { display: '$297',   instalment: '3 × $99',   checkoutUrl: '#ls-pending' },
+    gather: { display: '$597',   instalment: '3 × $199',  checkoutUrl: '#ls-pending' },
+    root:   { display: '$1,497', instalment: '3 × $499',  checkoutUrl: '#ls-pending' },
+  },
+}
+
+// ── COMPONENT ──────────────────────────────────────────────────
+
+export function RegionSelector() {
+  const [activeRegion, setActiveRegion] = useState<RegionKey>('za')
+  const currentPricing = PRICING[activeRegion]
 
   return (
-    <div>
-      {/* Region tabs */}
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "var(--space-s)",
-          marginBottom: "var(--space-xl)",
-          justifyContent: "center",
-        }}
-      >
-        {REGIONS.map((r) => (
+    <div className="region-selector">
+
+      {/* Region tab strip */}
+      <div className="region-tabs" role="tablist" aria-label="Select your region">
+        {REGIONS.map((region) => (
           <button
-            key={r.id}
-            onClick={() => setActiveRegion(r.id)}
-            style={{
-              padding: "var(--space-s) var(--space-l)",
-              borderRadius: "var(--radius-round)",
-              border: activeRegion === r.id ? "none" : "var(--border-medium)",
-              backgroundColor:
-                activeRegion === r.id
-                  ? "var(--color-clay)"
-                  : "transparent",
-              color:
-                activeRegion === r.id
-                  ? "var(--color-ivory)"
-                  : "var(--color-text-muted)",
-              fontFamily: "var(--font-body)",
-              fontSize: "var(--text-body-s)",
-              fontWeight: "var(--font-weight-medium)",
-              letterSpacing: "var(--tracking-wide)",
-              cursor: "pointer",
-              transition: "all var(--duration-base) var(--ease-standard)",
-            }}
+            key={region.key}
+            role="tab"
+            aria-selected={activeRegion === region.key}
+            aria-controls="pricing-grid"
+            className={`region-tab ${activeRegion === region.key ? 'region-tab--active' : ''}`}
+            onClick={() => setActiveRegion(region.key)}
           >
-            {r.flag} {r.label}
+            <span className="region-tab__flag" aria-hidden="true">
+              {region.flag}
+            </span>
+            <span className="region-tab__label">{region.label}</span>
           </button>
         ))}
       </div>
 
-      {/* Region note */}
-      <p
-        style={{
-          textAlign: "center",
-          fontSize: "var(--text-body-s)",
-          color: "var(--color-text-muted)",
-          marginBottom: "var(--space-2xl)",
-          fontStyle: "italic",
-          fontFamily: "var(--font-display)",
-        }}
-      >
-        {region.note}
-      </p>
-
-      {/* Tier cards */}
+      {/* Pricing cards */}
       <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-          gap: "var(--space-l)",
-        }}
+        id="pricing-grid"
+        role="tabpanel"
+        className="pricing-grid"
+        aria-label={`Pricing for ${REGIONS.find(r => r.key === activeRegion)?.label}`}
       >
-        {region.tiers.map((tier, index) => (
-          <div
-            key={tier.id}
-            style={{
-              backgroundColor:
-                index === 1 ? "var(--color-clay)" : "var(--color-surface)",
-              borderRadius: "var(--radius-l)",
-              padding: "var(--space-xl)",
-              border:
-                index === 1 ? "none" : "var(--border-subtle)",
-              boxShadow:
-                index === 1 ? "var(--shadow-warm)" : "var(--shadow-s)",
-              display: "flex",
-              flexDirection: "column",
-              gap: "var(--space-m)",
-              position: "relative",
-            }}
-          >
-            {index === 1 && (
-              <span
-                className="pill pill--accent"
-                style={{
-                  position: "absolute",
-                  top: "var(--space-m)",
-                  right: "var(--space-m)",
-                  fontSize: "var(--text-label)",
-                }}
-              >
-                Most popular
-              </span>
-            )}
+        {TIERS.map((tier) => {
+          const price = currentPricing[tier.key]
+          const isPending = price.checkoutUrl === '#ls-pending'
 
-            <h4
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "var(--text-display-m)",
-                fontWeight: "var(--font-weight-light)",
-                color: index === 1 ? "var(--color-ivory)" : "var(--color-text)",
-              }}
+          return (
+            <div
+              key={tier.key}
+              className={`pricing-card ${tier.featured ? 'pricing-card--featured' : ''}`}
             >
-              {tier.name}
-            </h4>
+              {tier.featured && (
+                <span className="pricing-card__badge">Most popular</span>
+              )}
 
-            <div>
-              <span
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "var(--text-display-l)",
-                  fontWeight: "var(--font-weight-light)",
-                  color: index === 1 ? "var(--color-ivory)" : "var(--color-text)",
-                  letterSpacing: "var(--tracking-tight)",
-                }}
+              <div className="pricing-card__header">
+                <span className="pricing-card__icon" aria-hidden="true">
+                  {tier.icon}
+                </span>
+                <h3 className="pricing-card__name">{tier.name}</h3>
+                <p className="pricing-card__subtitle">{tier.subtitle}</p>
+              </div>
+
+              {/* Price display */}
+              <div className="pricing-card__price">
+                <span className="pricing-card__amount">{price.display}</span>
+                {price.instalment && (
+                  <span className="pricing-card__instalment">
+                    or {price.instalment}
+                  </span>
+                )}
+              </div>
+
+              <blockquote className="pricing-card__tagline">
+                {tier.tagline}
+              </blockquote>
+
+              <ul
+                className="pricing-card__includes"
+                aria-label={`${tier.name} includes`}
               >
-                {tier.price}
-              </span>
-              <p
-                style={{
-                  fontSize: "var(--text-body-s)",
-                  color:
-                    index === 1 ? "rgba(250,247,242,0.7)" : "var(--color-text-muted)",
-                  marginTop: "var(--space-xs)",
-                }}
-              >
-                {tier.installments}
+                {tier.includes.map((item) => (
+                  <li key={item} className="pricing-card__include-item">
+                    <span className="pricing-card__check" aria-hidden="true">
+                      ✓
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <p className="pricing-card__for">
+                <strong>For you if:</strong> {tier.for}
               </p>
+
+              {tier.capacity && (
+                <p className="pricing-card__capacity">{tier.capacity}</p>
+              )}
+
+              <Link
+                href={isPending ? '#pricing' : price.checkoutUrl}
+                className={`btn btn--lg ${tier.featured ? 'btn--primary' : 'btn--outline'} pricing-card__cta`}
+                aria-label={`Join at the ${tier.name} level — ${price.display}`}
+                aria-disabled={isPending}
+              >
+                {isPending ? 'Opening Soon' : `Join — ${tier.name}`}
+              </Link>
+
             </div>
-
-            <p
-              style={{
-                fontSize: "var(--text-body-s)",
-                lineHeight: "var(--leading-snug)",
-                color:
-                  index === 1 ? "rgba(250,247,242,0.85)" : "var(--color-text-muted)",
-                flexGrow: 1,
-              }}
-            >
-              {tier.description}
-            </p>
-
-            <a
-              href={tier.checkoutUrl}
-              className={index === 1 ? "btn btn--ghost" : "btn btn--primary"}
-              style={
-                index === 1
-                  ? {
-                      borderColor: "rgba(250,247,242,0.4)",
-                      color: "var(--color-ivory)",
-                    }
-                  : {}
-              }
-            >
-              Join this gathering
-            </a>
-          </div>
-        ))}
+          )
+        })}
       </div>
+
+      {/* Ubuntu note */}
+      <div className="ubuntu-note">
+        <p>
+          <strong>Ubuntu Pricing:</strong> A small number of scholarship places
+          are available at the South African rate for participants from
+          lower-income African countries.{' '}
+          <Link href="mailto:hello@afrikaikalafe.org" className="ubuntu-note__link">
+            Write to us
+          </Link>{' '}
+          to enquire.
+        </p>
+      </div>
+
     </div>
-  );
+  )
 }

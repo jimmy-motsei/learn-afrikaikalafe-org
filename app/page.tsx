@@ -1,587 +1,527 @@
-import Image from "next/image";
-import RegionSelector from "@/components/RegionSelector";
+//   - data/presenters.ts// ============================================================
+// app/page.tsx — Afrika Ikalafe Landing Page
+// Programme: Womb as Our First Ecology
+// Maintained by: Maru Online · hello@maruonline.com
+// Last updated: 27 March 2026
+//
+// SECTIONS:
+//   1. Nav
+//   2. Hero
+//   3. About — The Concept
+//   4. Programme — 7 Gatherings
+//   5. Presenters
+//   6. Pricing (RegionSelector stub)
+//   7. Footer
+//
+// REQUIRES:
+//   - globals.css with --color-*, --font-*, --space-*, --text-* tokens
+//   - /public/images/presenters/[slug].jpg (see presenters.ts)
+//   - components/PresenterCard.tsx
 
-const GATHERINGS = [
-  { number: "01", month: "Month TBC", title: "The Root — Origins & Belonging", presenter: "TBC" },
-  { number: "02", month: "Month TBC", title: "The Story — Oral Tradition & Memory", presenter: "TBC" },
-  { number: "03", month: "Month TBC", title: "The Body — Literature & the Physical Self", presenter: "TBC" },
-  { number: "04", month: "Month TBC", title: "The Land — Place, Displacement & Home", presenter: "TBC" },
-  { number: "05", month: "Month TBC", title: "The Voice — Language, Power & Identity", presenter: "TBC" },
-  { number: "06", month: "Month TBC", title: "The Future — Afrofuturism & Imagination", presenter: "TBC" },
-  { number: "07", month: "Month TBC", title: "The Return — Synthesis & Community", presenter: "Dr Motsei (Convenor)" },
-];
+// ============================================================
+
+import Image from 'next/image'
+import Link from 'next/link'
+import { presenters, convenor, guestPresenters, TRACK_LABELS } from '@/data/presenters'
+import { RegionSelector } from '@/components/RegionSelector'
+
+// ── METADATA ──────────────────────────────────────────────────
+export const metadata = {
+  title: 'Womb as Our First Ecology · Afrika Ikalafe Pluriversity',
+  description:
+    'A global gathering of 7 monthly online sessions convened by Dr Mmatshilo Motsei. Healing, embodiment, and community across the African continent and diaspora.',
+  openGraph: {
+    title: 'Womb as Our First Ecology',
+    description: 'A global gathering convened by Dr Mmatshilo Motsei · Afrika Ikalafe Pluriversity',
+    url: 'https://www.afrikaikalafe.org',
+    siteName: 'Afrika Ikalafe',
+  },
+}
+
+// ── TRACK COLOURS (mirrors presenter-card.css) ─────────────────
+const TRACK_COLOUR: Record<string, string> = {
+  convenor:   'var(--color-earth)',
+  healing:    'var(--color-clay)',
+  embodiment: 'var(--color-ochre)',
+  community:  'var(--color-sage)',
+}
+
+// ── GATHERING DATA ─────────────────────────────────────────────
+// Ordered list for the programme section
+const gatherings = [
+  {
+    number: 1,
+    presenter: 'Dr Mmatshilo Motsei',
+    role: 'Convenor',
+    topic: 'Womb as First Ecology — The Concept, The Call, The Gathering',
+    track: 'convenor' as const,
+  },
+  {
+    number: 2,
+    presenter: 'Darlene Miller',
+    role: 'Healing',
+    topic: 'To be announced',
+    track: 'healing' as const,
+  },
+  {
+    number: 3,
+    presenter: 'Jessica Horn',
+    role: 'Embodiment',
+    topic: 'To be announced',
+    track: 'embodiment' as const,
+  },
+  {
+    number: 4,
+    presenter: 'Lyn Ossome',
+    role: 'Community',
+    topic: 'To be announced',
+    track: 'community' as const,
+  },
+  {
+    number: 5,
+    presenter: 'Françoise Vergès',
+    role: 'Healing',
+    topic: 'To be announced',
+    track: 'healing' as const,
+  },
+  {
+    number: 6,
+    presenter: 'Rochelle Webster-Nembhard',
+    role: 'Embodiment',
+    topic: 'To be announced',
+    track: 'embodiment' as const,
+  },
+  {
+    number: 7,
+    presenter: 'Lizy Hall',
+    role: 'Community',
+    topic: 'To be announced',
+    track: 'community' as const,
+  },
+]
+
+// ── PRICING DATA ───────────────────────────────────────────────
+// RegionSelector will swap these URLs once Lemon Squeezy is live
+const tiers = [
+  {
+    id: 'seed',
+    icon: '🌱',
+    name: 'Seed',
+    subtitle: 'Enter the Archive',
+    tagline: 'Learn at your own pace. Return as often as you need.',
+    includes: [
+      'Lifetime access to all 7 recorded gatherings',
+      'Written reflection prompts per gathering',
+      'Participant resource library',
+    ],
+    for: 'Women who learn best independently, or whose timezone or schedule doesn\'t allow live attendance.',
+    checkoutUrl: '#', // TODO: Lemon Squeezy URL — SA ZAR
+  },
+  {
+    id: 'gather',
+    icon: '🌿',
+    name: 'Gather',
+    subtitle: 'Join the Circle',
+    tagline: 'Come into the circle. Learn with others who are walking the same path.',
+    featured: true,
+    includes: [
+      'Everything in Seed',
+      'Access to all 7 monthly live gatherings',
+      'Session replays within 48 hours',
+      'Telegram community space',
+    ],
+    for: 'Women who want the relational, embodied dimension of learning — to be witnessed and to witness others.',
+    checkoutUrl: '#', // TODO: Lemon Squeezy URL — SA ZAR
+  },
+  {
+    id: 'root',
+    icon: '🌳',
+    name: 'Root',
+    subtitle: 'Walk with Mmatshilo',
+    tagline: 'For those who are ready to go all the way in.',
+    includes: [
+      'Everything in Gather',
+      '4 × private 1:1 sessions with Dr Motsei',
+      'Personalised integration support',
+      'Priority access to future programmes',
+    ],
+    for: 'Women ready for deep personal transformation with Dr Motsei\'s direct guidance. Limited to 10–12 participants.',
+    capacity: 'Maximum 10–12 participants',
+    checkoutUrl: '#', // TODO: Lemon Squeezy URL — SA ZAR
+  },
+]
+
+// ══════════════════════════════════════════════════════════════
+// PAGE COMPONENT
+// ══════════════════════════════════════════════════════════════
 
 export default function HomePage() {
   return (
     <>
-      {/* ======================================================
-          NAV
-      ====================================================== */}
-      <nav
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 50,
-          backgroundColor: "var(--color-sand)",
-          borderBottom: "var(--border-subtle)",
-          backdropFilter: "blur(8px)",
-        }}
-      >
-        <div
-          className="container"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingTop: "var(--space-m)",
-            paddingBottom: "var(--space-m)",
-          }}
-        >
-          <Image
-            src="/logos/AfrikaIkalafe-Full-colour.png"
-            alt="Afrika Ikalafe Pluriversity"
-            width={68}
-            height={70}
-            priority
-            style={{ objectFit: "contain" }}
-          />
+      {/* ── 1. NAV ───────────────────────────────────────────── */}
+      <header className="site-nav">
+        <div className="site-nav__inner">
+          <Link href="/" className="site-nav__logo" aria-label="Afrika Ikalafe home">
+            {/* Logo placeholder — replace with <Image> once SVG received from Kgali */}
+            <span className="site-nav__logo-text">Afrika Ikalafe</span>
+          </Link>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "var(--space-xl)" }}>
-            <a
-              href="#programme"
-              style={{
-                fontSize: "var(--text-body-s)",
-                color: "var(--color-text-muted)",
-                letterSpacing: "var(--tracking-wide)",
-                textTransform: "uppercase",
-              }}
-            >
-              Programme
-            </a>
-            <a
-              href="#presenters"
-              style={{
-                fontSize: "var(--text-body-s)",
-                color: "var(--color-text-muted)",
-                letterSpacing: "var(--tracking-wide)",
-                textTransform: "uppercase",
-              }}
-            >
-              Presenters
-            </a>
-            <a
-              href="#join"
-              className="btn btn--primary"
-              style={{ padding: "var(--space-s) var(--space-l)" }}
-            >
-              Join the Gathering
-            </a>
-          </div>
+          <nav className="site-nav__links" aria-label="Primary navigation">
+            <Link href="#about">The Gathering</Link>
+            <Link href="#programme">Programme</Link>
+            <Link href="#presenters">Hosts</Link>
+            <Link href="#pricing">Join</Link>
+          </nav>
+
+          <Link href="#pricing" className="btn btn--primary btn--sm">
+            Register
+          </Link>
         </div>
-      </nav>
+      </header>
 
-      {/* ======================================================
-          HERO
-      ====================================================== */}
-      <section
-        style={{
-          backgroundColor: "var(--color-ivory)",
-          paddingTop: "var(--space-4xl)",
-          paddingBottom: "var(--space-3xl)",
-        }}
-      >
-        <div className="container container--narrow" style={{ textAlign: "center" }}>
-          <p className="eyebrow" style={{ marginBottom: "var(--space-l)" }}>
-            A Literary Gathering Programme
-          </p>
+      <main>
 
-          <h1
-            style={{
-              marginBottom: "var(--space-l)",
-              letterSpacing: "var(--tracking-tight)",
-            }}
-          >
-            Afrika Ikalafe
-          </h1>
+        {/* ── 2. HERO ─────────────────────────────────────────── */}
+        <section className="hero" id="top">
+          <div className="hero__inner">
 
-          <p
-            style={{
-              fontSize: "var(--text-body-l)",
-              color: "var(--color-text-muted)",
-              lineHeight: "var(--leading-loose)",
-              maxWidth: "560px",
-              marginInline: "auto",
-              marginBottom: "var(--space-2xl)",
-            }}
-          >
-            Seven gatherings. Multiple voices. One sustained conversation about
-            African literature, identity, and the stories we carry.
-            Convened by Dr Motsei — open to readers and thinkers across the continent and diaspora.
-          </p>
+            {/* Left — text */}
+            <div className="hero__text">
+              <span className="eyebrow hero__eyebrow">
+                A Global Gathering · 7 Monthly Sessions
+              </span>
 
-          <div
-            style={{
-              display: "flex",
-              gap: "var(--space-m)",
-              justifyContent: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <a href="#join" className="btn btn--primary">
-              Join the Gathering
-            </a>
-            <a href="#programme" className="btn btn--ghost">
-              See the Programme
-            </a>
-          </div>
+              <h1 className="hero__heading">
+                Womb as Our<br />
+                First Ecology
+              </h1>
 
-          <div
-            style={{
-              display: "flex",
-              gap: "var(--space-xl)",
-              justifyContent: "center",
-              marginTop: "var(--space-3xl)",
-              flexWrap: "wrap",
-            }}
-          >
-            {[
-              { value: "7", label: "Gatherings" },
-              { value: "5", label: "Regions" },
-              { value: "Online", label: "Live + Recorded" },
-            ].map((stat) => (
-              <div key={stat.label} style={{ textAlign: "center" }}>
-                <p
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "var(--text-display-m)",
-                    fontWeight: "var(--font-weight-light)",
-                    color: "var(--color-clay)",
-                    letterSpacing: "var(--tracking-tight)",
-                  }}
-                >
-                  {stat.value}
-                </p>
-                <p
-                  style={{
-                    fontSize: "var(--text-body-s)",
-                    color: "var(--color-text-muted)",
-                    letterSpacing: "var(--tracking-wide)",
-                    textTransform: "uppercase",
-                    marginTop: "var(--space-xs)",
-                  }}
-                >
-                  {stat.label}
-                </p>
+              <p className="hero__lead">
+                Convened by Dr Mmatshilo Motsei, this programme brings together
+                seven scholar-practitioners across the African continent and diaspora
+                to remember, reclaim, and re-root.
+              </p>
+
+              <div className="hero__actions">
+                <Link href="#pricing" className="btn btn--primary btn--lg">
+                  Join the Gathering
+                </Link>
+                <Link href="#about" className="btn btn--ghost btn--lg">
+                  Learn more
+                </Link>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ======================================================
-          WHAT IS AFRIKA IKALAFE
-      ====================================================== */}
-      <section
-        style={{
-          backgroundColor: "var(--color-bg)",
-          paddingTop: "var(--space-3xl)",
-          paddingBottom: "var(--space-3xl)",
-        }}
-      >
-        <div className="container container--narrow" style={{ textAlign: "center" }}>
-          <p className="eyebrow" style={{ marginBottom: "var(--space-m)" }}>
-            About the programme
-          </p>
-          <h2 style={{ marginBottom: "var(--space-l)" }}>
-            A space for the African literary imagination
-          </h2>
-          <p
-            style={{
-              fontSize: "var(--text-body-l)",
-              color: "var(--color-text-muted)",
-              lineHeight: "var(--leading-loose)",
-              marginBottom: "var(--space-l)",
-            }}
-          >
-            Afrika Ikalafe is a year-long gathering programme that brings writers,
-            readers, scholars, and storytellers into sustained conversation.
-            Each gathering is anchored by a theme and led by a featured presenter —
-            thinkers from across the continent and diaspora whose work illuminates a
-            different dimension of African literary life.
-          </p>
-          <p
-            style={{
-              fontSize: "var(--text-body)",
-              color: "var(--color-text-muted)",
-              lineHeight: "var(--leading-loose)",
-            }}
-          >
-            The community lives on Telegram — a quiet, intentional space for between-gathering
-            reading, reflection, and dialogue.
-          </p>
-        </div>
-      </section>
+              <p className="hero__meta">
+                afrikaikalafe.org · Open to women globally
+              </p>
+            </div>
 
-      {/* ======================================================
-          PROGRAMME — 7 GATHERINGS
-      ====================================================== */}
-      <section
-        id="programme"
-        style={{
-          backgroundColor: "var(--color-surface-alt)",
-          paddingTop: "var(--space-3xl)",
-          paddingBottom: "var(--space-3xl)",
-        }}
-      >
-        <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "var(--space-2xl)" }}>
-            <p className="eyebrow" style={{ marginBottom: "var(--space-m)" }}>
-              Seven gatherings
-            </p>
-            <h2>The Programme</h2>
-          </div>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-              gap: "var(--space-l)",
-            }}
-          >
-            {GATHERINGS.map((g) => (
-              <div
-                key={g.number}
-                style={{
-                  backgroundColor: "var(--color-surface)",
-                  borderRadius: "var(--radius-l)",
-                  padding: "var(--space-xl)",
-                  border: "var(--border-subtle)",
-                  boxShadow: "var(--shadow-s)",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "var(--space-m)",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "var(--space-m)" }}>
-                  <span
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: "var(--text-display-m)",
-                      fontWeight: "var(--font-weight-light)",
-                      color: "var(--color-ochre)",
-                      opacity: 0.6,
-                      lineHeight: 1,
-                    }}
-                  >
-                    {g.number}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "var(--text-label)",
-                      color: "var(--color-text-muted)",
-                      letterSpacing: "var(--tracking-wider)",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    {g.month}
-                  </span>
-                </div>
-                <h4
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontWeight: "var(--font-weight-light)",
-                    fontSize: "var(--text-heading)",
-                    lineHeight: "var(--leading-snug)",
-                    color: "var(--color-text)",
-                  }}
-                >
-                  {g.title}
-                </h4>
-                <p
-                  style={{
-                    fontSize: "var(--text-body-s)",
-                    color: "var(--color-text-muted)",
-                    fontStyle: g.presenter === "TBC" ? "italic" : "normal",
-                  }}
-                >
-                  {g.presenter === "TBC" ? "Presenter to be announced" : g.presenter}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ======================================================
-          PRESENTERS — PLACEHOLDER
-      ====================================================== */}
-      <section
-        id="presenters"
-        style={{
-          backgroundColor: "var(--color-ivory)",
-          paddingTop: "var(--space-3xl)",
-          paddingBottom: "var(--space-3xl)",
-        }}
-      >
-        <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "var(--space-2xl)" }}>
-            <p className="eyebrow" style={{ marginBottom: "var(--space-m)" }}>
-              The voices
-            </p>
-            <h2>Presenters</h2>
-            <p
-              style={{
-                fontSize: "var(--text-body)",
-                color: "var(--color-text-muted)",
-                marginTop: "var(--space-m)",
-                fontStyle: "italic",
-                fontFamily: "var(--font-display)",
-              }}
-            >
-              Full presenter lineup and portraits coming soon.
-            </p>
-          </div>
-
-          {/* Placeholder grid — replace with real presenter cards once photos arrive from Kgali */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-              gap: "var(--space-l)",
-              maxWidth: "900px",
-              marginInline: "auto",
-            }}
-          >
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div
-                key={i}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: "var(--space-m)",
-                }}
-              >
-                <div
-                  style={{
-                    width: "120px",
-                    height: "120px",
-                    borderRadius: "var(--radius-round)",
-                    backgroundColor: "var(--color-sand-deep)",
-                    border: "var(--border-subtle)",
-                  }}
+            {/* Right — Dr Motsei image */}
+            <div className="hero__image-wrap">
+              <div className="hero__image-frame">
+                <Image
+                  src="/images/presenters/mmatshilo-motsei.jpg"
+                  alt="Dr Mmatshilo Motsei — Convenor, Womb as Our First Ecology"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="hero__image"
+                  style={{ objectPosition: 'center top' }}
                 />
-                <p
-                  style={{
-                    fontSize: "var(--text-body-s)",
-                    color: "var(--color-text-muted)",
-                    fontStyle: "italic",
-                    fontFamily: "var(--font-display)",
-                    textAlign: "center",
-                  }}
-                >
-                  Coming soon
+              </div>
+              {/* Decorative caption */}
+              <p className="hero__image-caption">
+                Dr Mmatshilo Motsei · Convenor
+              </p>
+            </div>
+
+          </div>
+
+          {/* Decorative divider — mimics the Adinkra band from brand cards */}
+          <div className="hero__band" aria-hidden="true" />
+        </section>
+
+        {/* ── 3. ABOUT — THE CONCEPT ──────────────────────────── */}
+        <section className="about-section" id="about">
+          <div className="about-section__inner">
+
+            <div className="about-section__header">
+              <span className="eyebrow">The Work</span>
+              <h2 className="section-heading">
+                What We Are Gathering For
+              </h2>
+            </div>
+
+            <div className="about-section__body">
+              <div className="about-section__text">
+                <p className="lead-text">
+                  The womb is not only a body part. It is a living archive — the
+                  first ecology every human being has ever known. To remember it
+                  is to remember ourselves.
+                </p>
+                <p>
+                  Afrika Ikalafe Pluriversity is a centre for land-based healing,
+                  learning and living. Founded by Dr Mmatshilo Motsei — physician,
+                  author, and cultural activist — it is the only African-led,
+                  African-origin, land-based womb healing Pluriversity with global reach.
+                </p>
+                <p>
+                  <em>Womb as Our First Ecology</em> is a seven-gathering global
+                  programme. Each session is held by a different scholar, artist,
+                  or practitioner — women who carry this knowledge from the ground
+                  of their own lived and studied experience.
+                </p>
+                <p>
+                  This is not a course. It is a circle.
                 </p>
               </div>
-            ))}
+
+              {/* Stat callouts */}
+              <div className="about-section__stats">
+                {[
+                  { number: '7', label: 'Monthly Gatherings' },
+                  { number: '7', label: 'Scholars & Artists' },
+                  { number: '5', label: 'Continents Represented' },
+                  { number: '3', label: 'Pathways to Join' },
+                ].map(stat => (
+                  <div key={stat.label} className="stat-card">
+                    <span className="stat-card__number">{stat.number}</span>
+                    <span className="stat-card__label">{stat.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
+        </section>
 
-          <div style={{ textAlign: "center", marginTop: "var(--space-2xl)" }}>
-            <span className="pill">
-              Presenter portraits pending · Google Drive link awaited from Kgali
-            </span>
+        {/* ── 4. PROGRAMME — 7 GATHERINGS ─────────────────────── */}
+        <section className="programme-section" id="programme">
+          <div className="programme-section__inner">
+
+            <div className="programme-section__header">
+              <span className="eyebrow">The Journey</span>
+              <h2 className="section-heading">
+                Seven Gatherings
+              </h2>
+              <p className="section-intro">
+                Each gathering is led by a different presenter. Dr Motsei opens
+                the series and convenes the space throughout. Sessions are held
+                online monthly, with replays available within 48 hours.
+              </p>
+            </div>
+
+            <ol className="gathering-list" aria-label="Programme gatherings">
+              {gatherings.map((g) => (
+                <li key={g.number} className="gathering-item">
+                  <span
+                    className="gathering-item__number"
+                    style={{ color: TRACK_COLOUR[g.track] }}
+                  >
+                    {String(g.number).padStart(2, '0')}
+                  </span>
+
+                  <div className="gathering-item__body">
+                    <span
+                      className="gathering-item__track"
+                      style={{ color: TRACK_COLOUR[g.track] }}
+                    >
+                      {TRACK_LABELS[g.track]}
+                    </span>
+                    <h3 className="gathering-item__presenter">{g.presenter}</h3>
+                    <p className="gathering-item__topic">{g.topic}</p>
+                  </div>
+
+                  <span className="gathering-item__month">Month TBC</span>
+                </li>
+              ))}
+            </ol>
+
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ======================================================
-          CONVENOR
-      ====================================================== */}
-      <section
-        className="section--inverse"
-        style={{
-          paddingTop: "var(--space-3xl)",
-          paddingBottom: "var(--space-3xl)",
-        }}
-      >
-        <div className="container container--narrow" style={{ textAlign: "center" }}>
-          <p className="eyebrow" style={{ marginBottom: "var(--space-m)" }}>
-            Convened by
-          </p>
-          <h2 style={{ marginBottom: "var(--space-l)" }}>Dr Motsei</h2>
-          <p
-            style={{
-              fontSize: "var(--text-body-l)",
-              color: "var(--color-inverse-text)",
-              lineHeight: "var(--leading-loose)",
-              opacity: 0.8,
-            }}
-          >
-            [Convenor biography to be added — placeholder pending Dr Motsei&apos;s approval]
-          </p>
-        </div>
-      </section>
+        {/* ── 5. PRESENTERS ───────────────────────────────────── */}
+        <section className="presenters-section" id="presenters">
+          <div className="presenters-section__inner">
 
-      {/* ======================================================
-          PRICING — REGION SELECTOR
-      ====================================================== */}
-      <section
-        id="join"
-        style={{
-          backgroundColor: "var(--color-bg)",
-          paddingTop: "var(--space-3xl)",
-          paddingBottom: "var(--space-3xl)",
-        }}
-      >
-        <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "var(--space-2xl)" }}>
-            <p className="eyebrow" style={{ marginBottom: "var(--space-m)" }}>
-              Join the gathering
+            <div className="presenters-section__header">
+              <span className="eyebrow">The Women Holding This Space</span>
+              <h2 className="section-heading">
+                Meet the Hosts
+              </h2>
+              <p className="section-intro">
+                Together, this team will guide participants through a powerful
+                journey of remembering the womb as our first ecology.
+              </p>
+            </div>
+
+            {/* Convenor — featured */}
+            {convenor && (
+              <div className="presenter-featured">
+                <div className="presenter-featured__photo-wrap">
+                  <Image
+                    src={convenor.imagePath}
+                    alt={convenor.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 45vw"
+                    className="presenter-featured__photo"
+                    style={{ objectPosition: 'center top' }}
+                  />
+                </div>
+                <div className="presenter-featured__content">
+                  <span className="presenter-featured__track eyebrow">
+                    {TRACK_LABELS[convenor.track]}
+                  </span>
+                  <h3 className="presenter-featured__name">
+                    {convenor.name}
+                  </h3>
+                  <p className="presenter-featured__title">
+                    {convenor.title}
+                  </p>
+                  <p className="presenter-featured__location">
+                    {convenor.location}
+                  </p>
+                  <p className="presenter-featured__bio">
+                    {convenor.bio}
+                  </p>
+                  <span className="gathering-badge">Gathering 1 · Convenor</span>
+                </div>
+              </div>
+            )}
+
+            {/* Group poster */}
+            <div className="group-poster-wrap">
+              <Image
+                src="/images/group-poster.jpg"
+                alt="All hosts of Womb as Our First Ecology — Mmatshilo Motsei, Darlene Miller, Jessica Horn, Lyn Ossome, Françoise Vergès, Rochelle Webster-Nembhard, Lizy Hall"
+                width={900}
+                height={1100}
+                className="group-poster"
+                style={{ width: '100%', height: 'auto' }}
+              />
+            </div>
+
+            {/* Guest presenter grid */}
+            <div className="presenter-grid">
+              {guestPresenters.map((p) => (
+                <article key={p.id} className="presenter-card" data-track={p.track}>
+                  <div className="presenter-card__photo-wrap">
+                    <Image
+                      src={p.imagePath}
+                      alt={p.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="presenter-card__photo"
+                      style={{ objectPosition: 'center top' }}
+                    />
+                    <div className="presenter-card__overlay" />
+                  </div>
+                  <div className="presenter-card__content">
+                    <span
+                      className="presenter-card__track"
+                      style={{ backgroundColor: TRACK_COLOUR[p.track] }}
+                    >
+                      {TRACK_LABELS[p.track]}
+                    </span>
+                    <h3 className="presenter-card__name">{p.name}</h3>
+                    <p className="presenter-card__title">{p.title}</p>
+                    {p.institution && (
+                      <p className="presenter-card__institution">{p.institution}</p>
+                    )}
+                    <p className="presenter-card__location">{p.location}</p>
+                    <p className="presenter-card__bio">{p.bio}</p>
+                    {p.gathering && (
+                      <span className="gathering-badge">
+                        Gathering {p.gathering}
+                      </span>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+
+          </div>
+        </section>
+
+        {/* ── 6. PRICING ──────────────────────────────────────── */}
+        <section className="pricing-section" id="pricing">
+          <div className="pricing-section__inner">
+
+            <div className="pricing-section__header">
+              <span className="eyebrow" style={{ color: 'var(--color-sand)' }}>
+                Three Pathways
+              </span>
+              <h2 className="section-heading" style={{ color: 'var(--color-ivory)' }}>
+                How to Join
+              </h2>
+              <p className="section-intro" style={{ color: 'var(--color-muted)' }}>
+                These are not feature bundles. They are levels of relationship
+                with the work — and with Dr Motsei. Select your region to see
+                pricing in your currency.
+              </p>
+            </div>
+
+            <RegionSelector />
+
+          </div>
+        </section>
+
+        {/* ── 7. COMMUNITY CTA ────────────────────────────────── */}
+        <section className="community-section">
+          <div className="community-section__inner">
+            <span className="eyebrow">Between Gatherings</span>
+            <h2 className="section-heading">
+              A Space of Ongoing Belonging
+            </h2>
+            <p className="lead-text">
+              Participants connect through a private Telegram community between
+              sessions — continuing the conversation, supporting one another,
+              and staying rooted in the work.
             </p>
-            <h2 style={{ marginBottom: "var(--space-l)" }}>Choose your region</h2>
-            <p
-              style={{
-                fontSize: "var(--text-body)",
-                color: "var(--color-text-muted)",
-                maxWidth: "480px",
-                marginInline: "auto",
-                lineHeight: "var(--leading-base)",
-              }}
-            >
-              We use geographic pricing to make the programme accessible wherever you are.
-              Select your region to see local pricing and payment options.
+            <Link href="#pricing" className="btn btn--primary btn--lg">
+              Join the Gathering
+            </Link>
+          </div>
+        </section>
+
+      </main>
+
+      {/* ── FOOTER ──────────────────────────────────────────────── */}
+      <footer className="site-footer">
+        <div className="site-footer__inner">
+
+          <div className="site-footer__brand">
+            <span className="site-footer__name">Afrika Ikalafe Pluriversity</span>
+            <p className="site-footer__tagline">
+              Centre for land-based healing, learning and living.
             </p>
           </div>
 
-          <RegionSelector />
+          <nav className="site-footer__links" aria-label="Footer navigation">
+            <Link href="https://www.instagram.com/afrikaikalafe/" target="_blank" rel="noopener noreferrer">
+              Instagram
+            </Link>
+            <Link href="https://x.com/AfrikaIkalafe" target="_blank" rel="noopener noreferrer">
+              X / Twitter
+            </Link>
+            <Link href="https://www.facebook.com/afrikaikalafe" target="_blank" rel="noopener noreferrer">
+              Facebook
+            </Link>
+            <Link href="mailto:hello@afrikaikalafe.org">
+              Contact
+            </Link>
+          </nav>
 
-          <p
-            style={{
-              textAlign: "center",
-              fontSize: "var(--text-body-s)",
-              color: "var(--color-text-muted)",
-              marginTop: "var(--space-xl)",
-              fontStyle: "italic",
-              fontFamily: "var(--font-display)",
-            }}
-          >
-            ⚠️ Checkout links will go live once Lemon Squeezy setup is complete.
+          <p className="site-footer__legal">
+            © {new Date().getFullYear()} Afrika Ikalafe Pluriversity.
+            Website by{' '}
+            <Link href="https://maruonline.com" target="_blank" rel="noopener noreferrer">
+              Maru Online
+            </Link>.
           </p>
-        </div>
-      </section>
 
-      {/* ======================================================
-          COMMUNITY — TELEGRAM
-      ====================================================== */}
-      <section
-        style={{
-          backgroundColor: "var(--color-surface-alt)",
-          paddingTop: "var(--space-2xl)",
-          paddingBottom: "var(--space-2xl)",
-        }}
-      >
-        <div className="container container--narrow" style={{ textAlign: "center" }}>
-          <p className="eyebrow" style={{ marginBottom: "var(--space-m)" }}>
-            Between gatherings
-          </p>
-          <h3 style={{ marginBottom: "var(--space-l)" }}>
-            The community lives on Telegram
-          </h3>
-          <p
-            style={{
-              fontSize: "var(--text-body)",
-              color: "var(--color-text-muted)",
-              lineHeight: "var(--leading-loose)",
-              marginBottom: "var(--space-xl)",
-            }}
-          >
-            A quiet, intentional space for reading, reflection, and dialogue between sessions.
-            All programme members are welcomed into the Telegram community on enrolment.
-          </p>
-          <a href="#join" className="btn btn--ghost">
-            Join to get access
-          </a>
-        </div>
-      </section>
-
-      {/* ======================================================
-          FOOTER
-      ====================================================== */}
-      <footer
-        style={{
-          backgroundColor: "var(--color-earth)",
-          color: "var(--color-sand)",
-          paddingTop: "var(--space-2xl)",
-          paddingBottom: "var(--space-2xl)",
-        }}
-      >
-        <div
-          className="container"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "var(--space-l)",
-            textAlign: "center",
-          }}
-        >
-          <Image
-            src="/logos/AfrikaIkalafe-Full-colour.png"
-            alt="Afrika Ikalafe"
-            width={155}
-            height={160}
-            style={{ objectFit: "contain" }}
-          />
-          <p
-            style={{
-              fontSize: "var(--text-body-s)",
-              color: "var(--color-muted)",
-              maxWidth: "400px",
-              lineHeight: "var(--leading-base)",
-            }}
-          >
-            A literary gathering programme open to readers and thinkers across Africa and the diaspora.
-          </p>
-          <div
-            style={{
-              display: "flex",
-              gap: "var(--space-xl)",
-              flexWrap: "wrap",
-              justifyContent: "center",
-            }}
-          >
-            {[
-              { label: "Instagram", href: "https://www.instagram.com/afrikaikalafe/" },
-              { label: "X / Twitter", href: "https://x.com/AfrikaIkalafe" },
-              { label: "Facebook", href: "https://facebook.com/afrikaikalafe" },
-            ].map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  fontSize: "var(--text-body-s)",
-                  color: "var(--color-muted)",
-                  letterSpacing: "var(--tracking-wide)",
-                  textTransform: "uppercase",
-                }}
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-          <p
-            style={{
-              fontSize: "var(--text-label)",
-              color: "var(--color-muted)",
-              letterSpacing: "var(--tracking-wide)",
-            }}
-          >
-            © 2026 Afrika Ikalafe · Built by Maru Online
-          </p>
         </div>
       </footer>
     </>
-  );
+  )
 }
