@@ -268,8 +268,8 @@ export default function HomePage() {
                 </p>
                 <p>
                   Afrika Ikalafe Pluriversity is a centre for land-based healing,
-                  learning and living. Founded by Dr Mmatshilo Motsei — physician,
-                  author, and cultural activist — it is the only African-led,
+                  learning and living. Founded by Dr Mmatshilo Motsei — nurse, midwife,
+                  author, and healing justice pioneer — it is the only African-led,
                   African-origin, land-based womb healing Pluriversity with global reach.
                 </p>
                 <p>

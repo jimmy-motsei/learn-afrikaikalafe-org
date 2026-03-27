@@ -1176,14 +1176,6 @@ img { display: block; max-width: 100%; }
   }
 }
 
-.presenter-card__photo-wrap {
-  position:     relative;
-  aspect-ratio: 4 / 5;
-  background:   var(--color-sand-deep);
-  overflow:     hidden;
-  min-height:   300px;
-}
-
 .presenter-card__overlay {
   position:   absolute;
   inset:      0;
