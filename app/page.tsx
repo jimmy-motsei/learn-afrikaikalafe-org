@@ -51,6 +51,7 @@ const TRACK_COLOUR: Record<string, string> = {
 const gatherings = [
   {
     number: 1,
+    month: 'May 2025',
     presenter: 'Dr Mmatshilo Motsei',
     role: 'Convenor',
     topic: 'Womb as First Ecology — The Concept, The Call, The Gathering',
@@ -58,27 +59,31 @@ const gatherings = [
   },
   {
     number: 2,
+    month: 'June 2025',
+    presenter: 'Liz Hall',
+    role: 'Community',
+    topic: 'To be announced',
+    track: 'community' as const,
+  },
+  {
+    number: 3,
+    month: 'July 2025',
     presenter: 'Darlene Miller',
     role: 'Healing',
     topic: 'To be announced',
     track: 'healing' as const,
   },
   {
-    number: 3,
+    number: 4,
+    month: 'August 2025',
     presenter: 'Jessica Horn',
     role: 'Embodiment',
     topic: 'To be announced',
     track: 'embodiment' as const,
   },
   {
-    number: 4,
-    presenter: 'Lyn Ossome',
-    role: 'Community',
-    topic: 'To be announced',
-    track: 'community' as const,
-  },
-  {
     number: 5,
+    month: 'September 2025',
     presenter: 'Françoise Vergès',
     role: 'Healing',
     topic: 'To be announced',
@@ -86,17 +91,19 @@ const gatherings = [
   },
   {
     number: 6,
+    month: 'October 2025',
+    presenter: 'Lyn Ossome',
+    role: 'Community',
+    topic: 'To be announced',
+    track: 'community' as const,
+  },
+  {
+    number: 7,
+    month: 'November 2025',
     presenter: 'Rochelle Webster-Nembhard',
     role: 'Embodiment',
     topic: 'To be announced',
     track: 'embodiment' as const,
-  },
-  {
-    number: 7,
-    presenter: 'Lizy Hall',
-    role: 'Community',
-    topic: 'To be announced',
-    track: 'community' as const,
   },
 ]
 
@@ -332,7 +339,7 @@ export default function HomePage() {
                     <p className="gathering-item__topic">{g.topic}</p>
                   </div>
 
-                  <span className="gathering-item__month">Month TBC</span>
+                  <span className="gathering-item__month">{g.month}</span>
                 </li>
               ))}
             </ol>
