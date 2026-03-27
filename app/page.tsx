@@ -515,7 +515,7 @@ export default function HomePage() {
             <Link href="https://www.facebook.com/afrikaikalafe" target="_blank" rel="noopener noreferrer">
               Facebook
             </Link>
-            <Link href="mailto:hello@afrikaikalafe.org">
+            <Link href="mailto:mmatshilomotsei@gmail.com">
               Contact
             </Link>
           </nav>
