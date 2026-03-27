@@ -724,6 +724,16 @@ img { display: block; max-width: 100%; }
   border-color:     rgba(245, 239, 228, 0.6);
 }
 
+/* btn--outline on light card backgrounds (non-featured pricing cards) */
+.pricing-card:not(.pricing-card--featured) .btn--outline {
+  color:        var(--color-earth);
+  border-color: rgba(28, 18, 8, 0.28);
+}
+.pricing-card:not(.pricing-card--featured) .btn--outline:hover {
+  background-color: rgba(28, 18, 8, 0.05);
+  border-color:     rgba(28, 18, 8, 0.50);
+}
+
 /* ── NAV ──────────────────────────────────────────────────── */
 
 .site-nav {
@@ -1211,7 +1221,7 @@ img { display: block; max-width: 100%; }
 /* ── PRICING SECTION ──────────────────────────────────────── */
 
 .pricing-section {
-  background-color: var(--color-inverse-bg);
+  background-color: var(--color-sand-deep);
   padding:          var(--space-3xl) 0;
 }
 
@@ -1226,17 +1236,30 @@ img { display: block; max-width: 100%; }
   max-width:      var(--container-narrow);
 }
 
+/* Heading overrides — dark text on sand-deep background */
+.pricing-section__eyebrow {
+  color: var(--color-clay) !important;
+}
+
+.pricing-section__heading {
+  color: var(--color-earth) !important;
+}
+
+.pricing-section__intro {
+  color: var(--color-text-muted) !important;
+}
+
 .pricing-section__region-note {
   font-family:   var(--font-body);
   font-size:     var(--text-body-s);
-  color:         rgba(245, 239, 228, 0.82);
+  color:         var(--color-text-muted);
   margin-top:    var(--space-l);
   font-style:    italic;
 }
 
-/* Section intro override for dark inverse backgrounds */
+/* Section intro — dark text on light sand background */
 .pricing-section .section-intro {
-  color: rgba(245, 239, 228, 0.78);
+  color: var(--color-text-muted);
 }
 
 .pricing-grid {
@@ -1254,23 +1277,28 @@ img { display: block; max-width: 100%; }
 }
 
 .pricing-card {
-  background:     rgba(245, 239, 228, 0.06);
-  border:         1px solid rgba(245, 239, 228, 0.16);
+  background:     var(--color-ivory);
+  border:         1px solid rgba(28, 18, 8, 0.10);
   border-radius:  var(--radius-l);
   padding:        var(--space-xl);
   display:        flex;
   flex-direction: column;
   gap:            var(--space-l);
-  transition:     border-color var(--duration-base) var(--ease-standard);
+  box-shadow:     var(--shadow-s);
+  transition:     border-color var(--duration-base) var(--ease-standard),
+                  box-shadow   var(--duration-base) var(--ease-standard);
 }
 
 .pricing-card:hover {
-  border-color: rgba(245, 239, 228, 0.25);
+  border-color: rgba(28, 18, 8, 0.18);
+  box-shadow:   var(--shadow-m);
 }
 
+/* Featured card stays dark — makes it unmissable against the light section */
 .pricing-card--featured {
-  background:    rgba(139, 58, 30, 0.15);
+  background:    var(--color-earth);
   border-color:  var(--color-clay);
+  box-shadow:    var(--shadow-l);
   position:      relative;
 }
 
@@ -1306,8 +1334,13 @@ img { display: block; max-width: 100%; }
   font-family:    var(--font-display);
   font-size:      var(--text-display-m);
   font-weight:    300;
-  color:          var(--color-inverse-text);
+  color:          var(--color-earth);
   letter-spacing: -0.02em;
+}
+
+/* Featured card: restore light name */
+.pricing-card--featured .pricing-card__name {
+  color: var(--color-ivory);
 }
 
 .pricing-card__subtitle {
@@ -1321,10 +1354,14 @@ img { display: block; max-width: 100%; }
   font-family:  var(--font-body);
   font-style:   italic;
   font-size:    var(--text-body-s);
-  color:        rgba(245, 239, 228, 0.88);
+  color:        rgba(28, 18, 8, 0.68);
   border-left:  2px solid var(--color-clay);
   padding-left: var(--space-m);
   line-height:  1.7;
+}
+
+.pricing-card--featured .pricing-card__tagline {
+  color: rgba(245, 239, 228, 0.85);
 }
 
 .pricing-card__includes {
@@ -1339,8 +1376,12 @@ img { display: block; max-width: 100%; }
   gap:         var(--space-s);
   font-family: var(--font-body);
   font-size:   var(--text-body-s);
-  color:       rgba(245, 239, 228, 0.88);
+  color:       rgba(28, 18, 8, 0.78);
   line-height: 1.5;
+}
+
+.pricing-card--featured .pricing-card__include-item {
+  color: rgba(245, 239, 228, 0.88);
 }
 
 .pricing-card__check {
@@ -1352,12 +1393,20 @@ img { display: block; max-width: 100%; }
 .pricing-card__for {
   font-family: var(--font-body);
   font-size:   var(--text-body-s);
-  color:       rgba(245, 239, 228, 0.88);
+  color:       rgba(28, 18, 8, 0.72);
   line-height: 1.6;
 }
 
 .pricing-card__for strong {
-  color: rgba(245, 239, 228, 0.92);
+  color: var(--color-earth);
+}
+
+.pricing-card--featured .pricing-card__for {
+  color: rgba(245, 239, 228, 0.82);
+}
+
+.pricing-card--featured .pricing-card__for strong {
+  color: var(--color-ivory);
 }
 
 .pricing-card__capacity {
@@ -1377,7 +1426,11 @@ img { display: block; max-width: 100%; }
   gap:            var(--space-s);
   margin-top:     auto;
   padding-top:    var(--space-m);
-  border-top:     1px solid rgba(245, 239, 228, 0.12);
+  border-top:     1px solid rgba(28, 18, 8, 0.10);
+}
+
+.pricing-card--featured .pricing-card__ctas {
+  border-top-color: rgba(245, 239, 228, 0.15);
 }
 
 .pricing-card__cta {
@@ -1404,24 +1457,36 @@ img { display: block; max-width: 100%; }
   font-family:     var(--font-ui);
   font-size:       var(--text-body-s);
   font-weight:     500;
-  color:           rgba(245, 239, 228, 0.85);
+  color:           rgba(28, 18, 8, 0.50);
   text-decoration: none;
   padding:         0.45rem 0;
   transition:      color 0.2s;
 }
 
 .pricing-card__paypal:hover {
-  color: rgba(245, 239, 228, 0.9);
+  color: var(--color-earth);
+}
+
+.pricing-card--featured .pricing-card__paypal {
+  color: rgba(245, 239, 228, 0.70);
+}
+
+.pricing-card--featured .pricing-card__paypal:hover {
+  color: rgba(245, 239, 228, 0.95);
 }
 
 .pricing-card__paypal--pending {
   font-family:  var(--font-ui);
   font-size:    var(--text-body-s);
-  color:        rgba(245, 239, 228, 0.55);
+  color:        rgba(28, 18, 8, 0.35);
   text-align:   center;
   display:      block;
   padding:      0.45rem 0;
   cursor:       default;
+}
+
+.pricing-card--featured .pricing-card__paypal--pending {
+  color: rgba(245, 239, 228, 0.45);
 }
 
 .pricing-card__paypal-icon {
@@ -1434,7 +1499,8 @@ img { display: block; max-width: 100%; }
 .ubuntu-note {
   margin-top:    var(--space-2xl);
   padding:       var(--space-l);
-  border:        1px solid rgba(245, 239, 228, 0.12);
+  background:    rgba(28, 18, 8, 0.04);
+  border:        1px solid rgba(28, 18, 8, 0.10);
   border-radius: var(--radius-m);
   text-align:    center;
 }
@@ -1442,16 +1508,16 @@ img { display: block; max-width: 100%; }
 .ubuntu-note p {
   font-family: var(--font-body);
   font-size:   var(--text-body-s);
-  color:       rgba(245, 239, 228, 0.88);
+  color:       rgba(28, 18, 8, 0.72);
   line-height: 1.7;
 }
 
 .ubuntu-note strong {
-  color: rgba(245, 239, 228, 0.92);
+  color: var(--color-earth);
 }
 
 .ubuntu-note__link {
-  color:           var(--color-ochre);
+  color:           var(--color-clay);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -1573,8 +1639,8 @@ img { display: block; max-width: 100%; }
   gap:             var(--space-xs);
   flex-wrap:       wrap;
   justify-content: center;
-  background:      rgba(245, 239, 228, 0.05);
-  border:          1px solid rgba(245, 239, 228, 0.1);
+  background:      rgba(28, 18, 8, 0.05);
+  border:          1px solid rgba(28, 18, 8, 0.10);
   border-radius:   var(--radius-round);
   padding:         var(--space-xs);
   width:           fit-content;
@@ -1588,7 +1654,7 @@ img { display: block; max-width: 100%; }
   font-family:      var(--font-body);
   font-size:        var(--text-body-s);
   font-weight:      400;
-  color:            rgba(245, 239, 228, 0.88);
+  color:            rgba(28, 18, 8, 0.72);
   background:       transparent;
   border:           none;
   border-radius:    var(--radius-round);
@@ -1601,8 +1667,8 @@ img { display: block; max-width: 100%; }
 }
 
 .region-tab:hover {
-  color:            rgba(245, 239, 228, 0.85);
-  background-color: rgba(245, 239, 228, 0.06);
+  color:            var(--color-earth);
+  background-color: rgba(28, 18, 8, 0.06);
 }
 
 .region-tab--active {
@@ -1641,15 +1707,20 @@ img { display: block; max-width: 100%; }
   flex-direction: column;
   gap:            var(--space-xs);
   padding:        var(--space-m) 0;
-  border-top:     1px solid rgba(245, 239, 228, 0.14);
-  border-bottom:  1px solid rgba(245, 239, 228, 0.14);
+  border-top:     1px solid rgba(28, 18, 8, 0.10);
+  border-bottom:  1px solid rgba(28, 18, 8, 0.10);
+}
+
+.pricing-card--featured .pricing-card__price {
+  border-top-color:    rgba(245, 239, 228, 0.14);
+  border-bottom-color: rgba(245, 239, 228, 0.14);
 }
 
 .pricing-card__amount {
   font-family:    var(--font-display);
   font-size:      clamp(2rem, 4vw, 2.75rem);
   font-weight:    300;
-  color:          var(--color-ivory);
+  color:          var(--color-earth);
   letter-spacing: -0.02em;
   line-height:    1;
 }
@@ -1661,8 +1732,12 @@ img { display: block; max-width: 100%; }
 .pricing-card__instalment {
   font-family:  var(--font-body);
   font-size:    var(--text-body-s);
-  color:        rgba(245, 239, 228, 0.85);
+  color:        rgba(28, 18, 8, 0.52);
   font-style:   italic;
+}
+
+.pricing-card--featured .pricing-card__instalment {
+  color: rgba(245, 239, 228, 0.78);
 }
 
 /* ── CARD BADGE ───────────────────────────────────────────── */

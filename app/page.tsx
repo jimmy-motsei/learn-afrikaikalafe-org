@@ -457,13 +457,13 @@ export default function HomePage() {
           <div className="pricing-section__inner">
 
             <div className="pricing-section__header">
-              <span className="eyebrow" style={{ color: 'var(--color-sand)' }}>
+              <span className="eyebrow pricing-section__eyebrow">
                 Three Pathways
               </span>
-              <h2 className="section-heading" style={{ color: 'var(--color-ivory)' }}>
+              <h2 className="section-heading pricing-section__heading">
                 How to Join
               </h2>
-              <p className="section-intro" style={{ color: 'var(--color-muted)' }}>
+              <p className="section-intro pricing-section__intro">
                 These are not feature bundles. They are levels of relationship
                 with the work — and with Dr Motsei. Select your region to see
                 pricing in your currency.
