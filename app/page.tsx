@@ -23,7 +23,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { presenters, convenor, guestPresenters, TRACK_LABELS } from '@/data/presenters'
-import { RegionSelector } from '@/components/RegionSelector'
+import { RegionSelector }    from '@/components/RegionSelector'
+import { GatheringSignup }   from '@/components/GatheringSignup'
 
 // ── METADATA ──────────────────────────────────────────────────
 export const metadata = {
@@ -486,9 +487,7 @@ export default function HomePage() {
               sessions — continuing the conversation, supporting one another,
               and staying rooted in the work.
             </p>
-            <Link href="#pricing" className="btn btn--primary btn--lg">
-              Join the Gathering
-            </Link>
+            <GatheringSignup />
           </div>
         </section>
 

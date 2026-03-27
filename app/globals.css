@@ -1638,3 +1638,99 @@ img { display: block; max-width: 100%; }
   cursor:         not-allowed;
   pointer-events: none;
 }
+
+/* ── GATHERING SIGNUP FORM ────────────────────────────────────── */
+
+.signup-form {
+  width:         100%;
+  max-width:     540px;
+  margin:        var(--space-xl) auto 0;
+  display:       flex;
+  flex-direction: column;
+  gap:           var(--space-s);
+}
+
+.signup-form__row {
+  display:   flex;
+  gap:       var(--space-s);
+  flex-wrap: wrap;
+}
+
+.signup-form__input {
+  flex:            1 1 260px;
+  font-family:     var(--font-body);
+  font-size:       var(--text-body);
+  color:           var(--color-text);
+  background:      var(--color-ivory);
+  border:          1px solid rgba(28, 18, 8, 0.2);
+  border-radius:   var(--radius-m);
+  padding:         0.75rem 1rem;
+  outline:         none;
+  transition:      border-color var(--duration-fast) var(--ease-standard);
+}
+
+.signup-form__input::placeholder {
+  color: var(--color-muted);
+}
+
+.signup-form__input:focus {
+  border-color: var(--color-clay);
+}
+
+.signup-form__input:disabled {
+  opacity: 0.6;
+  cursor:  not-allowed;
+}
+
+.signup-form__btn {
+  flex-shrink: 0;
+}
+
+.signup-form__btn:disabled {
+  opacity: 0.6;
+  cursor:  not-allowed;
+}
+
+.signup-form__error {
+  font-family: var(--font-body);
+  font-size:   var(--text-body-s);
+  color:       var(--color-clay);
+  text-align:  center;
+}
+
+.signup-form__note {
+  font-family: var(--font-body);
+  font-size:   var(--text-body-s);
+  color:       var(--color-muted);
+  text-align:  center;
+}
+
+/* Success state */
+.signup-success {
+  display:        flex;
+  flex-direction: column;
+  align-items:    center;
+  gap:            var(--space-s);
+  margin-top:     var(--space-xl);
+}
+
+.signup-success__icon {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  width:           48px;
+  height:          48px;
+  border-radius:   50%;
+  background:      var(--color-sage);
+  color:           var(--color-ivory);
+  font-size:       1.25rem;
+  font-weight:     600;
+}
+
+.signup-success__msg {
+  font-family: var(--font-display);
+  font-size:   var(--text-heading-s);
+  color:       var(--color-text);
+  font-style:  italic;
+  text-align:  center;
+}
