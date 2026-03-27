@@ -1237,9 +1237,14 @@ img { display: block; max-width: 100%; }
 .pricing-section__region-note {
   font-family:   var(--font-body);
   font-size:     var(--text-body-s);
-  color:         var(--color-muted);
+  color:         rgba(245, 239, 228, 0.65);
   margin-top:    var(--space-l);
   font-style:    italic;
+}
+
+/* Section intro override for dark inverse backgrounds */
+.pricing-section .section-intro {
+  color: rgba(245, 239, 228, 0.78);
 }
 
 .pricing-grid {
@@ -1257,8 +1262,8 @@ img { display: block; max-width: 100%; }
 }
 
 .pricing-card {
-  background:     rgba(245, 239, 228, 0.05);
-  border:         1px solid rgba(245, 239, 228, 0.12);
+  background:     rgba(245, 239, 228, 0.06);
+  border:         1px solid rgba(245, 239, 228, 0.16);
   border-radius:  var(--radius-l);
   padding:        var(--space-xl);
   display:        flex;
@@ -1342,7 +1347,7 @@ img { display: block; max-width: 100%; }
   gap:         var(--space-s);
   font-family: var(--font-body);
   font-size:   var(--text-body-s);
-  color:       rgba(245, 239, 228, 0.8);
+  color:       rgba(245, 239, 228, 0.88);
   line-height: 1.5;
 }
 
@@ -1355,12 +1360,12 @@ img { display: block; max-width: 100%; }
 .pricing-card__for {
   font-family: var(--font-body);
   font-size:   var(--text-body-s);
-  color:       rgba(245, 239, 228, 0.55);
+  color:       rgba(245, 239, 228, 0.72);
   line-height: 1.6;
 }
 
 .pricing-card__for strong {
-  color: rgba(245, 239, 228, 0.75);
+  color: rgba(245, 239, 228, 0.92);
 }
 
 .pricing-card__capacity {
@@ -1388,12 +1393,12 @@ img { display: block; max-width: 100%; }
 .ubuntu-note p {
   font-family: var(--font-body);
   font-size:   var(--text-body-s);
-  color:       rgba(245, 239, 228, 0.55);
+  color:       rgba(245, 239, 228, 0.72);
   line-height: 1.7;
 }
 
 .ubuntu-note strong {
-  color: rgba(245, 239, 228, 0.8);
+  color: rgba(245, 239, 228, 0.92);
 }
 
 .ubuntu-note__link {
@@ -1460,7 +1465,7 @@ img { display: block; max-width: 100%; }
 .site-footer__tagline {
   font-family: var(--font-body);
   font-size:   var(--text-body-s);
-  color:       var(--color-muted);
+  color:       rgba(245, 239, 228, 0.52);
   font-style:  italic;
 }
 
@@ -1473,7 +1478,7 @@ img { display: block; max-width: 100%; }
 .site-footer__links a {
   font-family:     var(--font-body);
   font-size:       var(--text-body-s);
-  color:           var(--color-muted);
+  color:           rgba(245, 239, 228, 0.65);
   text-decoration: none;
   letter-spacing:  0.04em;
   transition:      color var(--duration-fast) var(--ease-standard);
@@ -1484,16 +1489,16 @@ img { display: block; max-width: 100%; }
 .site-footer__legal {
   font-family: var(--font-body);
   font-size:   var(--text-body-s);
-  color:       var(--color-muted);
+  color:       rgba(245, 239, 228, 0.48);
   width:       100%;
   text-align:  center;
-  border-top:  1px solid rgba(245, 239, 228, 0.08);
+  border-top:  1px solid rgba(245, 239, 228, 0.10);
   padding-top: var(--space-l);
   margin-top:  var(--space-s);
 }
 
 .site-footer__legal a {
-  color:           var(--color-muted);
+  color:           rgba(245, 239, 228, 0.62);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -1534,7 +1539,7 @@ img { display: block; max-width: 100%; }
   font-family:      var(--font-body);
   font-size:        var(--text-body-s);
   font-weight:      400;
-  color:            rgba(245, 239, 228, 0.5);
+  color:            rgba(245, 239, 228, 0.68);
   background:       transparent;
   border:           none;
   border-radius:    var(--radius-round);
@@ -1587,8 +1592,8 @@ img { display: block; max-width: 100%; }
   flex-direction: column;
   gap:            var(--space-xs);
   padding:        var(--space-m) 0;
-  border-top:     1px solid rgba(245, 239, 228, 0.08);
-  border-bottom:  1px solid rgba(245, 239, 228, 0.08);
+  border-top:     1px solid rgba(245, 239, 228, 0.14);
+  border-bottom:  1px solid rgba(245, 239, 228, 0.14);
 }
 
 .pricing-card__amount {
@@ -1607,7 +1612,7 @@ img { display: block; max-width: 100%; }
 .pricing-card__instalment {
   font-family:  var(--font-body);
   font-size:    var(--text-body-s);
-  color:        rgba(245, 239, 228, 0.45);
+  color:        rgba(245, 239, 228, 0.70);
   font-style:   italic;
 }
 
