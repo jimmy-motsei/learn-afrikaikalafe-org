@@ -1447,54 +1447,6 @@ img { display: block; max-width: 100%; }
   justify-content: center;
 }
 
-/* ── PayPal secondary link ──────────────────────────────── */
-
-.pricing-card__paypal {
-  display:         flex;
-  align-items:     center;
-  justify-content: center;
-  gap:             0.4em;
-  font-family:     var(--font-ui);
-  font-size:       var(--text-body-s);
-  font-weight:     500;
-  color:           rgba(28, 18, 8, 0.50);
-  text-decoration: none;
-  padding:         0.45rem 0;
-  transition:      color 0.2s;
-}
-
-.pricing-card__paypal:hover {
-  color: var(--color-earth);
-}
-
-.pricing-card--featured .pricing-card__paypal {
-  color: rgba(245, 239, 228, 0.70);
-}
-
-.pricing-card--featured .pricing-card__paypal:hover {
-  color: rgba(245, 239, 228, 0.95);
-}
-
-.pricing-card__paypal--pending {
-  font-family:  var(--font-ui);
-  font-size:    var(--text-body-s);
-  color:        rgba(28, 18, 8, 0.35);
-  text-align:   center;
-  display:      block;
-  padding:      0.45rem 0;
-  cursor:       default;
-}
-
-.pricing-card--featured .pricing-card__paypal--pending {
-  color: rgba(245, 239, 228, 0.45);
-}
-
-.pricing-card__paypal-icon {
-  width:      1.1em;
-  height:     1.1em;
-  flex-shrink: 0;
-  opacity:    0.75;
-}
 
 .ubuntu-note {
   margin-top:    var(--space-2xl);
