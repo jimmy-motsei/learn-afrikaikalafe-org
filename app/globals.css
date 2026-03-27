@@ -1369,9 +1369,66 @@ img { display: block; max-width: 100%; }
   letter-spacing: 0.06em;
 }
 
+/* ── CTA block ─────────────────────────────────────────── */
+
+.pricing-card__ctas {
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--space-s);
+  margin-top:     auto;
+  padding-top:    var(--space-m);
+  border-top:     1px solid rgba(245, 239, 228, 0.12);
+}
+
 .pricing-card__cta {
   width:      100%;
-  margin-top: auto;
+  text-align: center;
+}
+
+.pricing-card__cta--disabled {
+  opacity:        0.55;
+  cursor:         not-allowed;
+  pointer-events: none;
+  display:        flex;
+  align-items:    center;
+  justify-content: center;
+}
+
+/* ── PayPal secondary link ──────────────────────────────── */
+
+.pricing-card__paypal {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  gap:             0.4em;
+  font-family:     var(--font-ui);
+  font-size:       var(--text-body-s);
+  font-weight:     500;
+  color:           rgba(245, 239, 228, 0.65);
+  text-decoration: none;
+  padding:         0.45rem 0;
+  transition:      color 0.2s;
+}
+
+.pricing-card__paypal:hover {
+  color: rgba(245, 239, 228, 0.9);
+}
+
+.pricing-card__paypal--pending {
+  font-family:  var(--font-ui);
+  font-size:    var(--text-body-s);
+  color:        rgba(245, 239, 228, 0.35);
+  text-align:   center;
+  display:      block;
+  padding:      0.45rem 0;
+  cursor:       default;
+}
+
+.pricing-card__paypal-icon {
+  width:      1.1em;
+  height:     1.1em;
+  flex-shrink: 0;
+  opacity:    0.75;
 }
 
 .ubuntu-note {
