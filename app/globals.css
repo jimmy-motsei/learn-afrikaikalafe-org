@@ -1229,7 +1229,7 @@ img { display: block; max-width: 100%; }
 .pricing-section__region-note {
   font-family:   var(--font-body);
   font-size:     var(--text-body-s);
-  color:         rgba(245, 239, 228, 0.65);
+  color:         rgba(245, 239, 228, 0.82);
   margin-top:    var(--space-l);
   font-style:    italic;
 }
@@ -1321,7 +1321,7 @@ img { display: block; max-width: 100%; }
   font-family:  var(--font-body);
   font-style:   italic;
   font-size:    var(--text-body-s);
-  color:        rgba(245, 239, 228, 0.65);
+  color:        rgba(245, 239, 228, 0.88);
   border-left:  2px solid var(--color-clay);
   padding-left: var(--space-m);
   line-height:  1.7;
@@ -1352,7 +1352,7 @@ img { display: block; max-width: 100%; }
 .pricing-card__for {
   font-family: var(--font-body);
   font-size:   var(--text-body-s);
-  color:       rgba(245, 239, 228, 0.72);
+  color:       rgba(245, 239, 228, 0.88);
   line-height: 1.6;
 }
 
@@ -1404,7 +1404,7 @@ img { display: block; max-width: 100%; }
   font-family:     var(--font-ui);
   font-size:       var(--text-body-s);
   font-weight:     500;
-  color:           rgba(245, 239, 228, 0.65);
+  color:           rgba(245, 239, 228, 0.85);
   text-decoration: none;
   padding:         0.45rem 0;
   transition:      color 0.2s;
@@ -1417,7 +1417,7 @@ img { display: block; max-width: 100%; }
 .pricing-card__paypal--pending {
   font-family:  var(--font-ui);
   font-size:    var(--text-body-s);
-  color:        rgba(245, 239, 228, 0.35);
+  color:        rgba(245, 239, 228, 0.55);
   text-align:   center;
   display:      block;
   padding:      0.45rem 0;
@@ -1442,7 +1442,7 @@ img { display: block; max-width: 100%; }
 .ubuntu-note p {
   font-family: var(--font-body);
   font-size:   var(--text-body-s);
-  color:       rgba(245, 239, 228, 0.72);
+  color:       rgba(245, 239, 228, 0.88);
   line-height: 1.7;
 }
 
@@ -1514,7 +1514,7 @@ img { display: block; max-width: 100%; }
 .site-footer__tagline {
   font-family: var(--font-body);
   font-size:   var(--text-body-s);
-  color:       rgba(245, 239, 228, 0.52);
+  color:       rgba(245, 239, 228, 0.80);
   font-style:  italic;
 }
 
@@ -1527,7 +1527,7 @@ img { display: block; max-width: 100%; }
 .site-footer__links a {
   font-family:     var(--font-body);
   font-size:       var(--text-body-s);
-  color:           rgba(245, 239, 228, 0.65);
+  color:           rgba(245, 239, 228, 0.88);
   text-decoration: none;
   letter-spacing:  0.04em;
   transition:      color var(--duration-fast) var(--ease-standard);
@@ -1538,7 +1538,7 @@ img { display: block; max-width: 100%; }
 .site-footer__legal {
   font-family: var(--font-body);
   font-size:   var(--text-body-s);
-  color:       rgba(245, 239, 228, 0.48);
+  color:       rgba(245, 239, 228, 0.72);
   width:       100%;
   text-align:  center;
   border-top:  1px solid rgba(245, 239, 228, 0.10);
@@ -1547,7 +1547,7 @@ img { display: block; max-width: 100%; }
 }
 
 .site-footer__legal a {
-  color:           rgba(245, 239, 228, 0.62);
+  color:           rgba(245, 239, 228, 0.82);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -1588,7 +1588,7 @@ img { display: block; max-width: 100%; }
   font-family:      var(--font-body);
   font-size:        var(--text-body-s);
   font-weight:      400;
-  color:            rgba(245, 239, 228, 0.68);
+  color:            rgba(245, 239, 228, 0.88);
   background:       transparent;
   border:           none;
   border-radius:    var(--radius-round);
@@ -1661,7 +1661,7 @@ img { display: block; max-width: 100%; }
 .pricing-card__instalment {
   font-family:  var(--font-body);
   font-size:    var(--text-body-s);
-  color:        rgba(245, 239, 228, 0.70);
+  color:        rgba(245, 239, 228, 0.85);
   font-style:   italic;
 }
 
