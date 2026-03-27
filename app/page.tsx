@@ -396,17 +396,18 @@ export default function HomePage() {
               </div>
             )}
 
-            {/* Group poster */}
+            {/* Group poster — add back when group photo is available
             <div className="group-poster-wrap">
               <Image
                 src="/images/group-poster.jpg"
-                alt="All hosts of Womb as Our First Ecology — Mmatshilo Motsei, Darlene Miller, Jessica Horn, Lyn Ossome, Françoise Vergès, Rochelle Webster-Nembhard, Lizy Hall"
+                alt="All hosts of Womb as Our First Ecology"
                 width={900}
                 height={1100}
                 className="group-poster"
                 style={{ width: '100%', height: 'auto' }}
               />
             </div>
+            */}
 
             {/* Guest presenter grid */}
             <div className="presenter-grid">
