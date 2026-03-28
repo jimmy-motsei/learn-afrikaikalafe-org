@@ -64,7 +64,7 @@ export const presenters: Presenter[] = [
     institution: 'Nelson Mandela University',
     location:    'South Africa',
     countryCode: 'ZA',
-    bio:         'Professor Darlene Miller brings deep scholarship in gender studies and indigenous knowledge systems to the programme. Her work centres the body as a site of political and ecological memory, tracing the connections between womb, land, and ancestral knowledge in Southern African contexts.',
+    bio:         'Professor Darlene Miller brings deep scholarship in gender studies and Indigenous knowledge systems to the programme. Her work centres the body as a site of political and ecological memory, tracing the connections between womb, land, and ancestral knowledge in Southern African contexts.',
     gathering:   2,
     topic:       'TBC',   // Suggested: Umbilical Ontologies — Indigenous Body-Archives and the Matrilineal Womb
     imagePath:   '/images/presenters/darlene-miller.jpg',
@@ -111,7 +111,7 @@ export const presenters: Presenter[] = [
     track:       'embodiment',
     title:       'Interdisciplinary Artist',
     location:    'South Africa / Mexico',
-    bio:         'Rochelle Webster-Nembhard works at the intersection of ritual, spatial systems, and embodied performance. Her practice refuses the separation of art, body, and land — creating experiences that hold the womb as a site of re-matriation, myth, and indigenous feminine technology. She brings the dimension of creative and somatic practice to the programme.',
+    bio:         'Rochelle Webster-Nembhard works at the intersection of ritual, spatial systems, and embodied performance. Her practice refuses the separation of art, body, and land — creating experiences that hold the womb as a site of re-matriation, myth, and Indigenous feminine technology. She brings the dimension of creative and somatic practice to the programme.',
     gathering:   6,
     topic:       'TBC',   // Suggested: Re-matriation — Earth, Feminine Mythologies and Indigenous Technology
     imagePath:   '/images/presenters/rochelle-webster-nembhard.jpg',
@@ -122,7 +122,7 @@ export const presenters: Presenter[] = [
     track:       'community',
     title:       'Psychodynamic Psychotherapist',
     location:    'Aotearoa, New Zealand',
-    bio:         'Liz Hall is a psychodynamic psychotherapist with a specialist interest in women\'s roles and archetypes within Māori storytelling traditions. She brings the southern hemisphere\'s indigenous feminine frameworks into conversation with African womb-centred healing — holding the community dimension of the programme with warmth and depth.',
+    bio:         'Liz Hall is a psychodynamic psychotherapist with a specialist interest in women\'s roles and archetypes within Māori storytelling traditions. She brings the southern hemisphere\'s Indigenous feminine frameworks into conversation with African womb-centred healing — holding the community dimension of the programme with warmth and depth.',
     gathering:   7,
     topic:       'TBC',
     imagePath:   '/images/presenters/liz-hall.jpg',
