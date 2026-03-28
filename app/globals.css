@@ -615,8 +615,9 @@ a:hover {
 
 .presenter-card:hover .presenter-card__bio,
 .presenter-card--featured .presenter-card__bio {
-  max-height: 200px;
-  opacity:    1;
+  max-height:  18rem;
+  overflow-y:  auto;
+  opacity:     1;
 }
 
 /* Gathering badge */
