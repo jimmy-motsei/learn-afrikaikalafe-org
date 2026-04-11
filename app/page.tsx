@@ -182,7 +182,7 @@ export default function HomePage() {
             <Link href="#pricing">Join</Link>
           </nav>
 
-          <Link href="#pricing" className="btn btn--primary btn--sm">
+          <Link href="#register" className="btn btn--primary btn--sm">
             Register
           </Link>
         </div>
@@ -212,7 +212,7 @@ export default function HomePage() {
               </p>
 
               <div className="hero__actions">
-                <Link href="#pricing" className="btn btn--primary btn--lg">
+                <Link href="#register" className="btn btn--primary btn--lg">
                   Join the Gathering
                 </Link>
                 <Link href="#about" className="btn btn--ghost btn--lg">
@@ -497,7 +497,7 @@ export default function HomePage() {
         </section>
 
         {/* ── 7. COMMUNITY CTA ────────────────────────────────── */}
-        <section className="community-section">
+        <section className="community-section" id="register">
           <FadeUp>
             <div className="community-section__inner">
               <span className="eyebrow">Between Gatherings</span>
