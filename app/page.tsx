@@ -32,11 +32,28 @@ export const metadata = {
   title: 'Womb as Our First Ecology · Afrika Ikalafe Pluriversity',
   description:
     'A global gathering of 7 monthly online sessions convened by Dr Mmatshilo Motsei. Healing, embodiment, and community across the African continent and diaspora.',
+  alternates: {
+    canonical: 'https://womb.afrikaikalafe.org',
+  },
   openGraph: {
     title: 'Womb as Our First Ecology',
     description: 'A global gathering convened by Dr Mmatshilo Motsei · Afrika Ikalafe Pluriversity',
-    url: 'https://www.afrikaikalafe.org',
+    url: 'https://womb.afrikaikalafe.org',
     siteName: 'Afrika Ikalafe',
+    images: [
+      {
+        url: 'https://womb.afrikaikalafe.org/images/hero-mmatshilo.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Womb as Our First Ecology — Afrika Ikalafe Pluriversity, convened by Dr Mmatshilo Motsei',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Womb as Our First Ecology',
+    description: 'A global gathering convened by Dr Mmatshilo Motsei · Afrika Ikalafe Pluriversity',
+    images: ['https://womb.afrikaikalafe.org/images/hero-mmatshilo.jpg'],
   },
 }
 
@@ -383,7 +400,7 @@ export default function HomePage() {
                 <div className="presenter-featured__photo-wrap">
                   <Image
                     src={convenor.imagePath}
-                    alt={convenor.name}
+                    alt={`${convenor.name} — Convenor, Womb as Our First Ecology`}
                     fill
                     sizes="(max-width: 768px) 100vw, 45vw"
                     className="presenter-featured__photo"
@@ -433,7 +450,7 @@ export default function HomePage() {
                   <div className="presenter-card__photo-wrap">
                     <Image
                       src={p.imagePath}
-                      alt={p.name}
+                      alt={`${p.name} — ${TRACK_LABELS[p.track]} host, Womb as Our First Ecology`}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="presenter-card__photo"
@@ -543,6 +560,8 @@ export default function HomePage() {
           </nav>
 
           <p className="site-footer__legal">
+            <Link href="/terms">Terms &amp; Conditions</Link>
+            {' · '}
             © {new Date().getFullYear()} Afrika Ikalafe Pluriversity.
             Website by{' '}
             <Link href="https://maruonline.com" target="_blank" rel="noopener noreferrer">
