@@ -26,7 +26,7 @@ const TRACK_COLOUR: Record<string, string> = {
 
 interface PresenterCardProps {
   presenter: Presenter
-  variant?: 'default' | 'featured'   // featured = larger, used for Dr Motsei
+  variant?: 'default' | 'featured'   // featured = larger, used for Motsei
 }
 
 export function PresenterCard({

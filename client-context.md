@@ -8,7 +8,7 @@
 ## 1. Project Overview
 
 **Client:** Afrika Ikalafe Pluriversity
-**Contact:** Dr Motsei (Convenor)
+**Contact:** Motsei (Convenor)
 **Type:** Single-page landing site — literary gathering programme
 **Status:** Build in progress · Not yet deployed to Vercel
 
@@ -77,7 +77,7 @@ A year-long literary gathering programme — 7 sessions, multiple presenters, pa
 | About | — | ✅ Built — programme description, Telegram mention |
 | Programme | `#programme` | ✅ Built — 7 gathering cards (numbers, titles, presenters) |
 | Presenters | `#presenters` | ⏳ Placeholder — portraits + names pending from Kgali (Google Drive) |
-| Convenor | — | ⏳ Placeholder — Dr Motsei bio pending approval |
+| Convenor | — | ⏳ Placeholder — Motsei bio pending approval |
 | Pricing | `#join` | ✅ Built — RegionSelector component, 5 regions × 3 tiers |
 | Community | — | ✅ Built — Telegram CTA |
 | Footer | — | ✅ Built — stacked logo, social links, copyright |
@@ -89,7 +89,7 @@ A year-long literary gathering programme — 7 sessions, multiple presenters, pa
 **7 Gatherings — confirmed presenter schedule:**
 | # | Month | Presenter | Topic |
 |---|---|---|---|
-| 01 | May 2026 | Dr Mmatshilo Motsei (Convenor) | Womb as First Ecology — The Concept, The Call, The Gathering |
+| 01 | May 2026 | Mmatshilo Motsei (Convenor) | Womb as First Ecology — The Concept, The Call, The Gathering |
 | 02 | June 2026 | Liz Hall | TBC |
 | 03 | July 2026 | Darlene Miller | TBC |
 | 04 | August 2026 | Jessica Horn | TBC |
@@ -97,7 +97,7 @@ A year-long literary gathering programme — 7 sessions, multiple presenters, pa
 | 06 | October 2026 | Lyn Ossome | TBC |
 | 07 | November 2026 | Rochelle Webster-Nembhard | TBC |
 
-**Dr Mmatshilo Motsei — confirmed short bio (live in presenters.ts):**
+**Mmatshilo Motsei — confirmed short bio (live in presenters.ts):**
 > Founder of Afrika Ikalafe Pluriversity and pioneer of African healing justice, Mmatshilo is a nurse, midwife, social researcher and author of six books. Three decades of transformative activism — from founding ADAPT in Alexandra Township to the UN Scroll of Honour and two Honorary Doctorates — have placed her at the forefront of womb-centred, community-rooted healing.
 
 **Title (live):** Nurse, Author & African Healing Justice Pioneer
@@ -137,7 +137,7 @@ All instalment options (3×) available. Checkout via **Lemon Squeezy** — not y
 |---|---|---|
 | Presenter portraits (×6) | Kgali — Google Drive | Presenters section |
 | Presenter names/bios | Kgali | Presenters section |
-| Dr Motsei bio copy | Dr Motsei approval | Convenor section |
+| Motsei bio copy | Motsei approval | Convenor section |
 | Logo — reversed/white version | Designer | Footer legibility on dark bg |
 | Lemon Squeezy product URLs | Client setup | All checkout links |
 | Gathering dates | Client | Programme cards |
@@ -167,7 +167,7 @@ All instalment options (3×) available. Checkout via **Lemon Squeezy** — not y
 ## 10. Outstanding Build Tasks
 
 1. Wire presenter portraits + names once received from Kgali
-2. Add Dr Motsei bio copy to Convenor section
+2. Add Motsei bio copy to Convenor section
 3. Replace `checkoutUrl: "#"` placeholders with Lemon Squeezy links
 4. Add reversed logo to footer once available
 5. Add gathering dates to programme cards once confirmed

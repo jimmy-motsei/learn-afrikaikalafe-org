@@ -23,7 +23,7 @@ export interface Presenter {
   gathering?: number        // Assigned gathering number (1–7), null = TBC
   topic?: string            // Confirmed topic title (TBC if pending)
   imagePath: string         // Relative to /public — e.g. /images/presenters/slug.jpg
-  isConvenor?: boolean      // Dr Motsei gets special treatment
+  isConvenor?: boolean      // Motsei gets special treatment
 }
 
 // ── TRACK COLOUR MAPPING ─────────────────────────────────────

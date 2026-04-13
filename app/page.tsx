@@ -31,13 +31,13 @@ import { FadeUp }            from '@/components/FadeUp'
 export const metadata = {
   title: 'Womb as Our First Ecology · Afrika Ikalafe Pluriversity',
   description:
-    'A global gathering of 7 monthly online sessions convened by Dr Mmatshilo Motsei. Healing, embodiment, and community across the African continent and diaspora.',
+    'A global gathering of 7 monthly online sessions convened by Mmatshilo Motsei. Healing, embodiment, and community across the African continent and diaspora.',
   alternates: {
     canonical: 'https://womb.afrikaikalafe.org',
   },
   openGraph: {
     title: 'Womb as Our First Ecology',
-    description: 'A global gathering convened by Dr Mmatshilo Motsei · Afrika Ikalafe Pluriversity',
+    description: 'A global gathering convened by Mmatshilo Motsei · Afrika Ikalafe Pluriversity',
     url: 'https://womb.afrikaikalafe.org',
     siteName: 'Afrika Ikalafe',
     images: [
@@ -45,14 +45,14 @@ export const metadata = {
         url: 'https://womb.afrikaikalafe.org/images/hero-mmatshilo.jpg',
         width: 1200,
         height: 630,
-        alt: 'Womb as Our First Ecology — Afrika Ikalafe Pluriversity, convened by Dr Mmatshilo Motsei',
+        alt: 'Womb as Our First Ecology — Afrika Ikalafe Pluriversity, convened by Mmatshilo Motsei',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Womb as Our First Ecology',
-    description: 'A global gathering convened by Dr Mmatshilo Motsei · Afrika Ikalafe Pluriversity',
+    description: 'A global gathering convened by Mmatshilo Motsei · Afrika Ikalafe Pluriversity',
     images: ['https://womb.afrikaikalafe.org/images/hero-mmatshilo.jpg'],
   },
 }
@@ -70,58 +70,58 @@ const TRACK_COLOUR: Record<string, string> = {
 const gatherings = [
   {
     number: 1,
-    month: 'May 2026',
-    presenter: 'Dr Mmatshilo Motsei',
+    month: '21 May 2026',
+    presenter: 'Mmatshilo Motsei',
     role: 'Convenor',
-    topic: 'Womb as First Ecology — The Concept, The Call, The Gathering',
+    topic: 'Womb as our first ecology: An Overview',
     track: 'convenor' as const,
   },
   {
     number: 2,
-    month: 'June 2026',
-    presenter: 'Liz Hall',
+    month: '18 June 2026',
+    presenter: 'Lizy Hall',
     role: 'Community',
-    topic: 'To be announced',
+    topic: 'Framing of women\'s bodies in Indigenous Maori Stories',
     track: 'community' as const,
   },
   {
     number: 3,
-    month: 'July 2026',
+    month: '16 July 2026',
     presenter: 'Darlene Miller',
     role: 'Healing',
-    topic: 'To be announced',
+    topic: 'Indigenous feminisms and women\'s leadership',
     track: 'healing' as const,
   },
   {
     number: 4,
-    month: 'August 2026',
+    month: '20 August 2026',
     presenter: 'Jessica Horn',
     role: 'Embodiment',
-    topic: 'To be announced',
+    topic: 'Womb politics: Violent histories, sovereign futures',
     track: 'embodiment' as const,
   },
   {
     number: 5,
-    month: 'September 2026',
+    month: '17 September 2026',
     presenter: 'Françoise Vergès',
     role: 'Healing',
-    topic: 'To be announced',
+    topic: 'Extraction as a womb wound',
     track: 'healing' as const,
   },
   {
     number: 6,
-    month: 'October 2026',
+    month: '15 October 2026',
     presenter: 'Lyn Ossome',
     role: 'Community',
-    topic: 'To be announced',
+    topic: 'Land, Nature and Social Reproduction',
     track: 'community' as const,
   },
   {
     number: 7,
-    month: 'November 2026',
-    presenter: 'Rochelle Webster-Nembhard',
+    month: '19 November 2026',
+    presenter: 'Rochelle Webster-Nembhard & Mmatshilo Motsei',
     role: 'Embodiment',
-    topic: 'To be announced',
+    topic: 'Closing conversation',
     track: 'embodiment' as const,
   },
 ]
@@ -167,11 +167,11 @@ const tiers = [
     tagline: 'For those who are ready to go all the way in.',
     includes: [
       'Everything in Gather',
-      '4 × private 1:1 sessions with Dr Motsei',
+      '4 × private 1:1 sessions with Motsei',
       'Personalised integration support',
       'Priority access to future programmes',
     ],
-    for: 'Women ready for deep personal transformation with Dr Motsei\'s direct guidance. Limited to 10–12 participants.',
+    for: 'Women ready for deep personal transformation with Motsei\'s direct guidance. Limited to 10–12 participants.',
     capacity: 'Maximum 10–12 participants',
     checkoutUrl: '#', // TODO: Lemon Squeezy URL — SA ZAR
   },
@@ -223,7 +223,7 @@ export default function HomePage() {
               </h1>
 
               <p className="hero__lead">
-                Convened by Dr Mmatshilo Motsei, this programme brings together
+                Convened by Mmatshilo Motsei, this programme brings together
                 seven scholar-practitioners across the African continent and diaspora
                 to remember, reclaim, and re-root.
               </p>
@@ -242,12 +242,12 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Right — Dr Motsei image */}
+            {/* Right — Motsei image */}
             <div className="hero__image-wrap">
               <div className="hero__image-frame">
                 <Image
                   src="/images/presenters/mmatshilo-motsei.jpg"
-                  alt="Dr Mmatshilo Motsei — Convenor, Womb as Our First Ecology"
+                  alt="Mmatshilo Motsei — Convenor, Womb as Our First Ecology"
                   fill
                   priority
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -257,7 +257,7 @@ export default function HomePage() {
               </div>
               {/* Decorative caption */}
               <p className="hero__image-caption">
-                Dr Mmatshilo Motsei · Convenor
+                Mmatshilo Motsei · Convenor
               </p>
             </div>
 
@@ -290,7 +290,7 @@ export default function HomePage() {
                   </p>
                   <p>
                     Afrika Ikalafe Pluriversity is a centre for land-based healing,
-                    learning and living. Founded by Dr Mmatshilo Motsei — nurse, midwife,
+                    learning and living. Founded by Mmatshilo Motsei — nurse, midwife,
                     author, and healing justice pioneer — it is the only African-led,
                     African-origin, land-based womb healing Pluriversity with global reach.
                   </p>
@@ -338,7 +338,7 @@ export default function HomePage() {
                   Seven Gatherings
                 </h2>
                 <p className="section-intro">
-                  Each gathering is led by a different presenter. Dr Motsei opens
+                  Each gathering is led by a different presenter. Motsei opens
                   the series and convenes the space throughout. Sessions are held
                   online monthly, with replays available within 48 hours.
                 </p>
@@ -500,7 +500,7 @@ export default function HomePage() {
                 </h2>
                 <p className="section-intro pricing-section__intro">
                   These are not feature bundles. They are levels of relationship
-                  with the work — and with Dr Motsei. Select your region to see
+                  with the work — and with Motsei. Select your region to see
                   pricing in your currency.
                 </p>
               </div>

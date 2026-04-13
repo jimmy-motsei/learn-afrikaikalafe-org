@@ -101,11 +101,11 @@ const TIERS: Tier[] = [
     tagline:  'For those who are ready to go all the way in.',
     includes: [
       'Everything in Gather',
-      '4 × private 1:1 sessions with Dr Motsei',
+      '4 × private 1:1 sessions with Motsei',
       'Personalised integration support',
       'Priority access to future programmes',
     ],
-    for:      'Women ready for deep personal transformation with Dr Motsei\'s direct guidance.',
+    for:      'Women ready for deep personal transformation with Motsei\'s direct guidance.',
     capacity: 'Maximum 10–12 participants per intake',
   },
 ]
