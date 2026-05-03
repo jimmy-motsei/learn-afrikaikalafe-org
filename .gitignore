@@ -40,3 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 scripts/presenter-raw/
+
+# local / scratch
+.claude/
+.output.txt
+/public/images/Instagram/
+/files/

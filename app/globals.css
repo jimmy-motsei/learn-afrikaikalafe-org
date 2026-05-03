@@ -1916,6 +1916,28 @@ img { display: block; max-width: 100%; }
 
 .signup-form__cancel:hover { color: var(--color-text); }
 
+.checkout-form {
+  padding: 0;
+  margin-top: var(--space-m);
+}
+
+.checkout-form .signup-form__fields {
+  margin-bottom: var(--space-m);
+}
+
+.checkout-form .signup-form__actions {
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.checkout-form .signup-form__submit {
+  width: 100%;
+}
+
+.pricing-card--checkout {
+  min-height: 500px;
+}
+
 .signup-form__note {
   font-family: var(--font-body);
   font-size:   var(--text-body-s);

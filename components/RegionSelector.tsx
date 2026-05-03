@@ -6,31 +6,26 @@
 // Maintained by: Maru Online · hello@maruonline.com
 //
 // PAYMENT PROCESSORS
-//   ZA region  → PayFast (ZAR)
-//   All other  → Lemon Squeezy (USD / GBP)
+//   All regions → Paystack
 //
-// TO WIRE UP REAL URLS:
-//   Search for '#payfast-pending' and '#ls-pending'
-//   and replace with live URLs once accounts are configured.
-//
-//   PayFast  → https://www.payfast.co.za/eng/process?...
-//   LS       → https://[store].lemonsqueezy.com/checkout/buy/[variant-id]
+// TO WIRE UP REAL ACCOUNTS:
+//   Ensure NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY and PAYSTACK_SECRET_KEY
+//   are set in your environment variables.
 // ============================================================
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 // ── TYPES ─────────────────────────────────────────────────────
 
 type RegionKey    = 'za' | 'africa' | 'us' | 'uk' | 'global'
 type TierKey      = 'seed' | 'gather' | 'root'
-type ProcessorKey = 'payfast' | 'lemonsqueezy'
+type ProcessorKey = 'paystack'
 
 interface TierPrice {
   display:      string   // e.g. "R 4,200" or "$397"
   instalment?:  string   // e.g. "3 × R 1,400"
   processor:    ProcessorKey
-  primaryUrl:   string   // PayFast or Lemon Squeezy URL
 }
 
 interface Region {
@@ -120,114 +115,89 @@ const TIERS: Tier[] = [
 // with live URLs when payment accounts are configured.
 
 const PRICING: Record<RegionKey, Record<TierKey, TierPrice>> = {
-
-  // ── 🇿🇦 South Africa — PayFast ────────────────────────────
   za: {
     seed: {
       display:    'R 4,200',
       instalment: '3 × R 1,400',
-      processor:  'payfast',
-      primaryUrl: '#payfast-pending',  // TODO: PayFast URL — R4,200
+      processor:  'paystack',
     },
     gather: {
       display:    'R 8,400',
       instalment: '3 × R 2,800',
-      processor:  'payfast',
-      primaryUrl: '#payfast-pending',  // TODO: PayFast URL — R8,400
+      processor:  'paystack',
     },
     root: {
-      display:    'R 16,800',
-      instalment: '3 × R 5,600',
-      processor:  'payfast',
-      primaryUrl: '#payfast-pending',  // TODO: PayFast URL — R16,800
+      display:    'R 12,800',
+      instalment: '3 × R 4,267',
+      processor:  'paystack',
     },
   },
-
-  // ── 🌍 Rest of Africa — Lemon Squeezy (USD) ───────────────
   africa: {
     seed: {
       display:    '$175',
       instalment: '3 × $58',
-      processor:  'lemonsqueezy',
-      primaryUrl: '#ls-pending',      // TODO: LS variant — afrikaikalafe-seed-africa
+      processor:  'paystack',
     },
     gather: {
       display:    '$350',
       instalment: '3 × $117',
-      processor:  'lemonsqueezy',
-      primaryUrl: '#ls-pending',      // TODO: LS variant — afrikaikalafe-gather-africa
+      processor:  'paystack',
     },
     root: {
       display:    '$700',
       instalment: '3 × $233',
-      processor:  'lemonsqueezy',
-      primaryUrl: '#ls-pending',      // TODO: LS variant — afrikaikalafe-root-africa
+      processor:  'paystack',
     },
   },
-
-  // ── 🇺🇸 USA & Canada — Lemon Squeezy (USD) ───────────────
   us: {
     seed: {
       display:    '$397',
       instalment: '3 × $133',
-      processor:  'lemonsqueezy',
-      primaryUrl: '#ls-pending',      // TODO: LS variant — afrikaikalafe-seed-us
+      processor:  'paystack',
     },
     gather: {
       display:    '$797',
       instalment: '3 × $266',
-      processor:  'lemonsqueezy',
-      primaryUrl: '#ls-pending',      // TODO: LS variant — afrikaikalafe-gather-us
+      processor:  'paystack',
     },
     root: {
       display:    '$1,997',
       instalment: '3 × $666',
-      processor:  'lemonsqueezy',
-      primaryUrl: '#ls-pending',      // TODO: LS variant — afrikaikalafe-root-us
+      processor:  'paystack',
     },
   },
-
-  // ── 🇬🇧 UK & Europe — Lemon Squeezy (GBP) ────────────────
   uk: {
     seed: {
       display:    '£297',
       instalment: '3 × £99',
-      processor:  'lemonsqueezy',
-      primaryUrl: '#ls-pending',      // TODO: LS variant — afrikaikalafe-seed-uk
+      processor:  'paystack',
     },
     gather: {
       display:    '£597',
       instalment: '3 × £199',
-      processor:  'lemonsqueezy',
-      primaryUrl: '#ls-pending',      // TODO: LS variant — afrikaikalafe-gather-uk
+      processor:  'paystack',
     },
     root: {
       display:    '£1,497',
       instalment: '3 × £499',
-      processor:  'lemonsqueezy',
-      primaryUrl: '#ls-pending',      // TODO: LS variant — afrikaikalafe-root-uk
+      processor:  'paystack',
     },
   },
-
-  // ── 🌐 Global — Lemon Squeezy (USD) ──────────────────────
   global: {
     seed: {
       display:    '$297',
       instalment: '3 × $99',
-      processor:  'lemonsqueezy',
-      primaryUrl: '#ls-pending',      // TODO: LS variant — afrikaikalafe-seed-global
+      processor:  'paystack',
     },
     gather: {
       display:    '$597',
       instalment: '3 × $199',
-      processor:  'lemonsqueezy',
-      primaryUrl: '#ls-pending',      // TODO: LS variant — afrikaikalafe-gather-global
+      processor:  'paystack',
     },
     root: {
       display:    '$1,497',
       instalment: '3 × $499',
-      processor:  'lemonsqueezy',
-      primaryUrl: '#ls-pending',      // TODO: LS variant — afrikaikalafe-root-global
+      processor:  'paystack',
     },
   },
 }
@@ -235,19 +205,93 @@ const PRICING: Record<RegionKey, Record<TierKey, TierPrice>> = {
 // ── PROCESSOR LABELS & ICONS ──────────────────────────────────
 
 const PROCESSOR_META: Record<ProcessorKey, { label: string; icon: string }> = {
-  payfast:      { label: 'Pay with PayFast',  icon: '🔒' },
-  lemonsqueezy: { label: 'Checkout',          icon: '🛒' },
+  paystack: { label: 'Pay with Paystack', icon: '💳' },
 }
 
-function isPending(url: string) {
-  return url.startsWith('#')
+// ── PAYSTACK + BREVO HANDLER ─────────────────────────────────
+
+declare global {
+  interface Window {
+    PaystackPop?: any
+  }
+}
+
+function loadPaystackScript() {
+  if (typeof window === 'undefined') return
+  if (window.PaystackPop) return
+  const script = document.createElement('script')
+  script.src = 'https://js.paystack.co/v1/inline.js'
+  script.async = true
+  document.body.appendChild(script)
 }
 
 // ── COMPONENT ─────────────────────────────────────────────────
 
 export function RegionSelector() {
   const [activeRegion, setActiveRegion] = useState<RegionKey>('za')
+  const [checkoutTier, setCheckoutTier] = useState<{ tier: Tier; price: TierPrice } | null>(null)
+  
   const currentPricing = PRICING[activeRegion]
+
+  function openPaymentModal(tier: Tier, price: TierPrice, email: string, firstName: string, lastName: string) {
+    loadPaystackScript()
+
+    const amount = parseInt(price.display.replace(/[^\d]/g, '')) * 100 // kobo/cents
+    const currency = price.display.startsWith('R') ? 'ZAR' 
+      : price.display.startsWith('$') ? 'USD' 
+      : price.display.startsWith('£') ? 'GBP' 
+      : 'USD'
+
+    const handler = window.PaystackPop && window.PaystackPop.setup({
+      key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || '',
+      email,
+      amount,
+      currency,
+      label: `${tier.name} — ${price.display}`,
+      metadata: {
+        firstName,
+        lastName,
+        tier: tier.name,
+      },
+      callback: async function(response: any) {
+        try {
+          const res = await fetch('/api/payment-verify', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({
+              reference: response.reference,
+              email,
+              firstName,
+              lastName,
+              tier: tier.name,
+              amount: amount / 100,
+              currency,
+            }),
+          })
+
+          const data = await res.json()
+          if (data.success) {
+            alert('Payment successful! You have been enrolled. Check your email for confirmation.')
+            setCheckoutTier(null)
+          } else {
+            alert('Payment received but enrolment failed. Please contact us at admin@afrikaikalafe.org')
+          }
+        } catch (err) {
+          alert('Payment complete! There was an issue with enrolment. Please contact us.')
+        }
+      },
+      onClose: function() {
+        // User closed the modal
+      },
+    })
+
+    if (handler) {
+      handler.openIframe()
+    } else {
+      // Script might not be loaded yet, try again in a bit or alert
+      alert('Payment system is loading. Please try again in a moment.')
+    }
+  }
 
   return (
     <div className="region-selector">
@@ -271,14 +315,14 @@ export function RegionSelector() {
       {/* Pricing cards */}
       <div className="pricing-grid" role="tabpanel">
         {TIERS.map((tier) => {
-          const price          = currentPricing[tier.key]
-          const primaryPending = isPending(price.primaryUrl)
-          const meta           = PROCESSOR_META[price.processor]
+          const price = currentPricing[tier.key]
+          const meta  = PROCESSOR_META[price.processor]
+          const isCheckingOut = checkoutTier?.tier.key === tier.key
 
           return (
             <div
               key={tier.key}
-              className={`pricing-card ${tier.featured ? 'pricing-card--featured' : ''}`}
+              className={`pricing-card ${tier.featured ? 'pricing-card--featured' : ''} ${isCheckingOut ? 'pricing-card--checkout' : ''}`}
             >
               {tier.featured && (
                 <span className="pricing-card__badge">Most popular</span>
@@ -299,48 +343,81 @@ export function RegionSelector() {
                 )}
               </div>
 
-              <blockquote className="pricing-card__tagline">{tier.tagline}</blockquote>
+              {!isCheckingOut && (
+                <>
+                  <blockquote className="pricing-card__tagline">{tier.tagline}</blockquote>
 
-              {/* Includes */}
-              <ul className="pricing-card__includes" aria-label={`${tier.name} includes`}>
-                {tier.includes.map((item) => (
-                  <li key={item} className="pricing-card__include-item">
-                    <span className="pricing-card__check" aria-hidden="true">✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+                  {/* Includes */}
+                  <ul className="pricing-card__includes" aria-label={`${tier.name} includes`}>
+                    {tier.includes.map((item) => (
+                      <li key={item} className="pricing-card__include-item">
+                        <span className="pricing-card__check" aria-hidden="true">✓</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
 
-              <p className="pricing-card__for">
-                <strong>For you if:</strong> {tier.for}
-              </p>
+                  <p className="pricing-card__for">
+                    <strong>For you if:</strong> {tier.for}
+                  </p>
 
-              {tier.capacity && (
-                <p className="pricing-card__capacity">{tier.capacity}</p>
+                  {tier.capacity && (
+                    <p className="pricing-card__capacity">{tier.capacity}</p>
+                  )}
+                </>
               )}
 
-              {/* ── CTA ── */}
+              {/* ── CTA / Checkout Form ── */}
               <div className="pricing-card__ctas">
-
-                {primaryPending ? (
-                  <span
-                    className={`btn btn--lg btn--cta-primary pricing-card__cta pricing-card__cta--disabled ${tier.featured ? 'btn--primary' : 'btn--outline'}`}
-                    aria-disabled="true"
-                  >
-                    Opening Soon
-                  </span>
-                ) : (
-                  <Link
-                    href={price.primaryUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                {!isCheckingOut ? (
+                  <button
                     className={`btn btn--lg btn--cta-primary pricing-card__cta ${tier.featured ? 'btn--primary' : 'btn--outline'}`}
                     aria-label={`${meta.label} — ${tier.name} ${price.display}`}
+                    onClick={() => {
+                      setCheckoutTier({ tier, price })
+                      loadPaystackScript()
+                    }}
                   >
                     {meta.icon} {meta.label}
-                  </Link>
+                  </button>
+                ) : (
+                  <form 
+                    className="signup-form checkout-form" 
+                    onSubmit={(e) => {
+                      e.preventDefault()
+                      const formData = new FormData(e.currentTarget)
+                      const email = formData.get('email') as string
+                      const firstName = formData.get('firstName') as string
+                      const lastName = formData.get('lastName') as string
+                      openPaymentModal(tier, price, email, firstName, lastName)
+                    }}
+                  >
+                    <div className="signup-form__fields">
+                      <div className="signup-form__row signup-form__row--names">
+                        <div className="signup-form__field">
+                          <label className="signup-form__label" htmlFor={`first-${tier.key}`}>First name</label>
+                          <input id={`first-${tier.key}`} className="signup-form__input" type="text" name="firstName" required />
+                        </div>
+                        <div className="signup-form__field">
+                          <label className="signup-form__label" htmlFor={`last-${tier.key}`}>Last name</label>
+                          <input id={`last-${tier.key}`} className="signup-form__input" type="text" name="lastName" />
+                        </div>
+                      </div>
+                      <div className="signup-form__field">
+                        <label className="signup-form__label" htmlFor={`email-${tier.key}`}>Email address</label>
+                        <input id={`email-${tier.key}`} className="signup-form__input" type="email" name="email" required />
+                      </div>
+                    </div>
+                    <div className="signup-form__actions">
+                      <button className="btn btn--primary btn--lg signup-form__submit" type="submit">
+                        Continue to Payment
+                      </button>
+                      <button className="signup-form__cancel" type="button" onClick={() => setCheckoutTier(null)}>
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
                 )}
-
               </div>
             </div>
           )
